@@ -3,8 +3,8 @@
 <link rel="stylesheet" href="css/bootstrap.min.css" />
 <link rel="stylesheet" href="css/bootstrap-responsive.min.css" />
 <link rel="stylesheet" href="css/fullcalendar.css" />
-<link rel="stylesheet" href="css/microsola-style.css" />
-<link rel="stylesheet" href="css/microsola-media.css" class="skin-color" />
+<link rel="stylesheet" href="css/maruti-style.css" />
+<link rel="stylesheet" href="css/maruti-media.css" class="skin-color" />
 
 <!--style for forms-->
 <link rel="stylesheet" href="css/colorpicker.css" />
