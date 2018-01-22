@@ -1,0 +1,113 @@
+/*----- Start Style for common -----*/
+#left-col:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+#left-col{
+	position:relative;
+	padding:20px;
+	width:940px;
+}
+
+.ad-block{
+	width:210px;
+	position:relative;
+	padding-botto:10px;
+	margin-top:20px;
+	float:left;
+	margin-left:25px;
+}
+
+.ad-block .containt{
+	padding-botto:10px;
+	background:#F2F2F2;
+	padding:10px;
+	min-height:60px;
+	overflow:hidden;
+	position:relative;
+}
+
+.main-link-btn{
+	height: 35px;
+    padding: 46px 0 0;
+	}
+
+.btn{
+	background:#9c9c9c;
+    color: #FFFFFF;
+    font-size: 1.1em;
+    font-weight: normal;
+	-webkit-border-radius: 4px;
+	border-radius: 4px; 
+	margin-left:23px;
+	padding:5px 10px;
+}
+
+
+.ad-block h3 {
+    background: url("../images/border.jpg") repeat-y scroll center center transparent;
+    color: #FFFFFF;
+    display: block;
+    font-size: 1.3em;
+    font-weight: normal;
+    padding: 8px;
+	margin:0;
+	
+		
+	
+-webkit-border-top-left-radius: 10px;
+-webkit-border-top-right-radius: 10px;
+-moz-border-radius-topleft: 10px;
+-moz-border-radius-topright: 10px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+}
+
+.xp_add_block h3 {
+    background: url("../images/xp_ad_bg.jpg") repeat-x;
+   
+}
+
+
+
+.ad-block a{
+    display: block;
+    font-size: 1.1em;
+    font-weight: bold;
+	padding:2px 5px;
+	height:60px;
+	position:absolute;
+	top:0;
+	left:0;
+	width:210px;
+
+}
+
+.ad-block a:hover{
+	color:#A6A6A6;
+	background:
+}
+
+.xp_ads{
+	clear:both;
+	/*margin:50px 0 0px 0;*/
+	padding:50px 0px 0px 0px;
+	text-align:center;
+}
+
+
+
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/
+
+
+
+
+
+
+

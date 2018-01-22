@@ -1,0 +1,109 @@
+/*----- Start Style for common -----*/
+.page-title:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+
+div.page-title{
+	padding:10px 0;
+    background: url("../images/border.jpg") repeat-y scroll left bottom ;
+}
+
+
+#main-header {
+ background-color: #fff !important;
+ background:none;
+}
+
+#main-header {
+    padding-bottom: 0px !important;
+}
+
+
+div.page-title div.views p{
+    margin: 0 0 0 20px;
+    padding: 0;
+}
+
+/*----- Start Style for 2 call page -----*/
+
+#left-col{
+	position:relative;
+	float:left;
+}
+
+#right-col{
+	position:relative;
+	float:left;
+}
+
+/*----- End Style for 2 call page -----*/
+
+
+
+
+
+
+
+
+
+
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/

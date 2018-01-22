@@ -1,0 +1,90 @@
+.help-wrapper ul:after,
+.page-title:after,
+.text-block:after,
+.advertising-wrapper:after,
+#main-banner div#nav:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/
+
+
+.help-wrapper,
+.advertising-wrapper{
+	padding:0 30px 30px;
+}
+
+.advertising-wrapper{
+	margin-top:30px;
+}
+
+.help-wrapper ul{
+	list-style-type:none;
+	margin:30px 0 0 0;
+	padding:0;
+}
+
+.help-wrapper ul li{
+	float:left;
+	margin:0 0 0 46px;
+}
+
+div.benifits a,
+.help-wrapper ul li a {
+    background: url("../images/bullet-home.png") no-repeat scroll left center transparent;
+    color: #6F6E6E;
+    display: block;
+    font-size: 1.2em;
+    padding: 4px 0 4px 20px;
+}
+
+.help-wrapper ul li.first{
+	margin:0 0 0 0px;
+}
+
+
+.help-wrapper ul li a.img{
+	padding:0;
+}
+
+
+
+.nivoSlider {
+    position: relative;
+}
+
+
+div.page-title{
+	padding:10px 0;
+    background: url("../images/border.jpg") repeat-y scroll left bottom ;
+}
+
+.
+
+.bullet-title {
+    font-weight: normal;
+    margin: 40px 0 0;
+    padding: 0 0 20px 20px;
+	background:url(../images/arror-title.png) no-repeat left 8px;
+	border-bottom:1px solid #becadc;
+}
+
+
+#main-header {
+    padding-bottom:8px;
+}
+
+a.more{
+	color:#274a8a;
+}
+
+a.more:hover{
+	color:#0fa249;
+}
+
+

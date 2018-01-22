@@ -1,0 +1,180 @@
+.services-wrapper ul:after,
+.page-title:after,
+.text-block:after,
+.advertising-wrapper:after,
+#main-banner div#nav:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/
+#main-banner {
+    height: 416px;
+    margin: 0 auto;
+    padding: 0;
+    position: relative;
+    width: 980px;
+}
+
+.services-wrapper,
+.advertising-wrapper{
+	padding:0 30px 30px;
+}
+
+.advertising-wrapper{
+	margin-top:30px;
+}
+
+.services-wrapper ul{
+	list-style-type:none;
+	margin:30px 0 0 0;
+	padding:0;
+}
+
+.services-wrapper ul li{
+	float:left;
+	margin:0 0 0 60px;
+}
+
+div.benifits a,
+.services-wrapper ul li a {
+    background: url("../images/bullet-home.png") no-repeat scroll left center transparent;
+    color: #6F6E6E;
+    display: block;
+    font-size: 1.2em;
+    padding: 4px 0 4px 20px;
+}
+
+.services-wrapper ul li.first{
+	margin:0 0 0 0px;
+}
+
+
+.services-wrapper ul li a.img{
+	padding:0;
+}
+
+
+
+.nivoSlider {
+    position: relative;
+}
+
+
+div.page-title{
+	padding:10px 0;
+    background: url("../images/border.jpg") repeat-y scroll left bottom ;
+}
+
+.advertising-wrapper div div.text-block{
+	min-height:270px;
+}
+
+
+
+.left-col,
+.mid-col,
+.right-col{
+	width:290px;
+	position:relative;
+	min-height:680x;
+}
+
+.mid-col{
+	margin-left:10px;
+}
+
+.left-col{
+	padding-right:10px;
+	border-right:solid 1px #bfc9dc;
+}
+
+.right-col{
+	padding-left:10px;
+	border-left:solid 1px #bfc9dc;
+}
+
+
+.right-col {
+    margin-left:10px;
+    min-height:604px;
+}
+
+
+
+.advertising-wrapper div .text-block img{
+	float:right;
+}
+
+
+.advertising-wrapper div div.text-block p {
+    color: #797878;
+    font-size: 1.1em;
+    line-height: 23px;
+}
+
+.bullet-title {
+    font-weight: normal;
+    margin: 40px 0 0;
+    padding: 0 0 20px 20px;
+	background:url(../images/arror-title.png) no-repeat left 8px;
+	border-bottom:1px solid #becadc;
+}
+
+#main-banner div#nav{
+	bottom: 0;
+    left: 439px;
+    position: absolute;
+    z-index: 100;
+	background:#1c726c;
+	padding:5px 10px;
+	
+-webkit-border-top-left-radius: 10px;
+-webkit-border-top-right-radius: 10px;
+-moz-border-radius-topleft: 10px;
+-moz-border-radius-topright: 10px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+}
+
+#main-banner div#nav a {
+    background: url("../images/sprit-icon.png") no-repeat scroll -86px -436px;
+    float: left;
+    height: 5px;
+    margin-left: 10px;
+    overflow: hidden;
+    padding: 5px;
+    text-indent: -9999px;
+    width: 5px;
+}
+
+
+#main-banner div#nav a.activeSlide {
+    background: url("../images/sprit-icon.png") no-repeat scroll -85px -480px;
+
+}
+
+#main-header {
+    padding-bottom:8px;
+}
+
+a.more{
+	color:#274a8a;
+}
+
+a.more:hover{
+	color:#0fa249;
+}
+
+
+.benifits {
+   min-height: 300px;
+}
+
+.advertising-wrapper div.right-col div.submit-block{
+	margin-top:57px;
+}

@@ -1,0 +1,350 @@
+/*----- Start Style for common -----*/
+
+#main-nav:after,
+#main-containt:after,
+#main-footer:after,
+.top-links:after,
+#main-top-menu:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+body{
+	background:#f2f2f2;
+}
+
+
+
+
+#main-header,
+#main-banner,
+#main-nav,
+#main-containt,
+#main-footer{
+	width:980px;
+	margin:0 auto;
+	position:relative;
+	background:#fff;
+}
+
+
+.float-l{
+	float:left;
+	_display:inline;
+}
+
+.float-r{
+	float:right;
+	_display:inline;
+}
+
+
+
+/*Gray Color*/
+.top-links a,
+.containt-block h3{
+	background-color:#f2f2f2;
+}
+
+div.containt-block div.containt {
+    min-height:64px;
+    padding:20px;
+    position:relative;
+}
+
+.gray-btn{
+	background: url("../images/sprit-icon.png") no-repeat scroll 34px -167px #9c9c9c;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    font-weight: normal;
+    min-width: 100px;
+    padding: 6px 40px 6px 10px;
+	
+	-webkit-border-radius: 5px;
+	border-radius: 5px; 
+}
+
+.gray-btn:hover{
+	background-color:#aaaaaa;
+}
+
+
+
+/*----- End Style for common -----*/
+
+
+
+/*----- Start Style for header -----*/
+#main-header{
+	height:80px;
+}
+
+#logo{
+	width:200px;
+}
+
+#top-statas-bar{
+	margin-left: 10px;
+    width: 75px;
+}
+
+
+.top-links {
+    background:none repeat scroll 0 0 #F2F2F2;
+    float:right;
+    height:34px;
+    min-width:120px;
+}
+
+
+
+.top-links a {
+    display: block;
+    float: right;
+    padding: 8px 10px 8px 11px;
+    position: relative;
+}
+
+.top-links a.user-icon{
+	background:#f2f2f2 url(../images/sprit-icon.png) -67px -109px no-repeat;
+	padding-left:40px;
+	
+}
+
+.top-links a.setings {
+    background: url("../images/sprit-icon.png") no-repeat -63px -53px #F2F2F2;
+    height: 17px;
+    padding: 8px 22px;
+}
+
+
+.top-links a.upgrade {
+   background:none repeat 0 0 #4EC048;
+    font-size:13px;
+    margin:5px 0 0;
+    padding:4px 10px;
+	
+	-webkit-border-radius: 5px;
+	border-radius: 5px; 
+}
+
+.top-links a.upgrade:hover {
+    background:#4ac543; 
+}
+
+
+.top-links a.log-out {
+    background:none repeat 0 0 #8F8F8F;
+    font-size:13px;
+    margin:5px 0 0 9px;
+    min-width:53px;
+    padding:4px 10px;
+	Panora Advertising
+	
+	-webkit-border-radius: 5px;
+	border-radius: 5px; 
+}
+
+.top-links a.log-out:hover{
+    background:#9d9c9c;
+}
+
+
+
+#top-statas-bar{
+	margin-left: 10px;
+    width: 750px;
+}
+/*----- End Style for header -----*/
+
+
+
+/*----- Start Style for main menu -----*/
+#main-top-menu {
+    margin: 0;
+    padding: 0;
+	width:760px;
+	position:relative;
+	margin-top:20px;
+}
+
+#main-top-menu ul {
+    margin: 0;
+    padding: 0;
+	list-style-type:none;
+}
+
+#main-top-menu ul li {
+    margin: 0;
+    padding: 0;
+	float:left;
+	margin-left:10px;
+}
+
+#main-top-menu ul li a{
+	color:#000;
+	padding:6px 12px;
+}
+
+#main-top-menu ul li.active a,	
+#main-top-menu ul li a:hover{
+	background:#188062;
+
+	border-radius: 5px 5px 0px 0px/5px 5px 0px 0px;
+	-webkit-border-radius: 5px 5px 0px 0px/5px 5px 0px 0px;
+	-moz-border-radius: 5px 5px 0px 0px/5px 5px 0px 0px;
+}
+/*----- End Style for main menu -----*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----- Start Style for footer -----*/
+
+#main-footer {
+    background:url("../images/border.jpg") no-repeat left top #FFFFFF;
+    height:80px;
+    margin:0 auto;
+    padding:8px 20px;
+    position:relative;
+    width:940px;
+}
+
+.copyright{
+	float:left;
+}
+
+.microsola {
+    bottom: 10px;
+    position: absolute;
+    right: 10px;
+}
+
+.footer-menu {
+    margin: 5px 20px 0;
+}
+
+.footer-menu a{
+	border-right: 1px solid #000;
+	padding:0 5px;
+	margin:0 5px;
+}
+
+.microsola a span{
+	color:#3CF;
+}
+
+.microsola a:hover span{
+	color:#999;
+}
+
+
+.success{
+		padding:10px;
+		border: solid 1px #159906;
+		margin:5px;
+		width:950px;
+		text-align:center;
+		background:#C8F9C6;
+	}
+	.error
+	{
+		padding:10px;
+		border: solid 1px #FF0000;
+		margin:5px;
+		width:950px;
+		text-align:center;
+		background:#FCC;
+	}
+	
+	.mws-form-message ul{
+		padding:0;
+		margin:0;
+		list-style-type:none;
+	}
+	.mws-form-message ul li{
+		padding:0;
+		margin:0;
+		list-style-type:none;
+	}
+
+/*----- End Style for footer -----*/
+
+
+
+
+
+
+
+
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/

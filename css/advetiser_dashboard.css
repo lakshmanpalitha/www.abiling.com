@@ -1,0 +1,88 @@
+/*----- Start Style for common -----*/
+.page-title:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+#main-header{
+	padding-bottom:0;
+	background:none;
+}
+
+.page-title{
+	position:relative;
+	display:block;
+	background:url("../images/border.jpg") repeat-y;
+}
+
+
+#left-col{
+	width:270px;
+	padding-left:10px;
+}
+
+#right-col{
+	margin-left:50px;
+	width:630px;
+}
+
+.containt-block{
+	margin-top:30px;
+}
+.main-link-btn{
+	height: 35px;
+    padding: 46px 0 0;
+	}
+
+.btn{
+	background: url("../images/sprit-icon.png") no-repeat scroll 54px -222px #9c9c9c;
+    color: #FFFFFF;
+    font-size: 1.4em;
+    font-weight: normal;
+    min-width: 100px;
+    padding: 15px 60px 15px 30px;
+	
+	-webkit-border-radius: 6px;
+	border-radius: 3px; 
+	margin-left:23px;
+}
+
+.submit-add{
+	background: url("../images/sprit-icon.png") no-repeat scroll 54px -222px #5bcd55;
+	margin-left:0;
+}
+.submit-add:hover{
+	background-color:#5bcd55;
+}
+
+
+.manage-add{
+	background: url("../images/sprit-icon.png") no-repeat scroll 71px -294px #42ba91;
+}
+
+.manage-add:hover{
+	background-color:#3acc9a;
+}
+
+.manage-payment{
+	background: url("../images/sprit-icon.png") no-repeat scroll 112px -360px #d4c731;
+}
+.manage-payment:hover{
+	background-color:#e3d424;
+}
+
+
+
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/
+
+
+
+
+
+
+

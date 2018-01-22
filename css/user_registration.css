@@ -1,0 +1,77 @@
+.submit-block:after,
+.containt:after { 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+
+div#main-containt div#left-col {
+    padding-left:0px;
+    width:100%;
+}
+
+.input-block {
+    float:left;
+    width:430px;
+    
+
+}
+
+.input-block:nth-child(2n+2) {  
+  margin-left: 80px;
+}
+
+
+label {
+    display:block;
+    float:left;
+    width:120px;
+    padding-right: 10px;
+	font-size:1.1em;
+}
+
+input,
+select {
+    float:left;
+    width:283px;
+    padding-right: 10px;
+    padding: 5px;
+
+}
+
+
+
+div.input-block select {
+    width:296px;
+}
+
+
+
+.submit-block{
+    text-align: right;
+    padding: 50px 0;
+    clear: both;
+}
+
+.submit-block input{
+    
+    width: 100px;
+    float: right;
+    
+}
+
+input.mid_size{
+	width:131px;
+}
+
+input.mid_size.Right{
+	margin-left:10px;
+}	
+
+
+
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/

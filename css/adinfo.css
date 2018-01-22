@@ -1,0 +1,105 @@
+/*----- Start Style for common -----*/
+#add-info-wrapper:after,
+div.timeperiod:after { 
+    content: "."; 
+    visibility: hidden; 
+    display: block; 
+    height: 0; 
+    clear: both;
+}
+
+#add-info-wrapper{
+    padding:20px;
+}
+
+.timeperiod{
+    position:relative;
+    width:100%;
+}
+
+div.timeperiod h3{
+    background:#F2F2F2;
+    color: #000000;
+    float: left;
+    font-size: 1.2em;
+    font-weight: normal;
+    margin: 0 30px 0 24px;
+    padding: 6px;
+    width: 85px;
+}
+
+div.timeperiod span{
+    font-size: 1.2em;
+    padding: 6px;
+    margin-left:50px
+}
+
+div.timeperiod span font{
+    font-size: 1.2em;
+    color:#000;
+    margin-left:10px;
+}
+
+
+.ad-info-block{
+    width:270px;
+    min-height:300px;
+    margin-left:20px;
+    float:left;
+    background:#f2f2f2;
+    padding:10px;
+    margin-top:30px;
+    border: thin solid #CCCCCC;
+}
+div.viewchart-wrapper h3,
+div.ad-info-block h3{
+    border-bottom: 1px solid #C2C2C2;
+    font-size: 1.2em;
+    font-weight: normal;
+    margin: 0;
+    padding-bottom: 5px;
+    position:relative;
+    display:block;
+}
+
+div.viewchart-wrapper h3{
+    border:none;
+    background:#f2f2f2;
+    padding:5px 30px;
+}
+
+div.ad-info-block h3 span{
+    position:absolute;
+    right:0px;
+}
+
+div.ad-info-block ul{
+    list-style-type:none;
+    padding:0;
+    margin-top:10px;
+}
+
+div.ad-info-block li{
+    color:#484848;
+    font-size:1.1em;
+    padding-right:4px;
+    position:relative;
+    margin-top:6px;
+}
+
+div.ad-info-block li span{
+    color:#000;
+    position:absolute;
+    right:0;
+}
+
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/
+
+
+
+
+
+
+

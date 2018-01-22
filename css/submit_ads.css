@@ -1,0 +1,205 @@
+.submit-block:after,
+.containt:after,
+div.input-block dl.accordion dd:after,
+.input-block:after { 
+    content: "."; 
+    visibility: hidden; 
+    display: block; 
+    height: 0; 
+    clear: both;
+}
+
+div#main-containt div#left-col {
+    padding-left:0px;
+    width:100%;
+}
+
+div.containt h3{
+    margin-bottom: 30px;
+}
+
+
+
+label {
+    display:block;
+    float:left;
+    width:120px;
+    padding-right: 10px;
+    font-size:1.1em;
+}
+
+input,
+select,
+textarea,
+.TextBoxDiv input {
+    float:left;
+    width:400px;
+    padding-right: 10px;
+    padding: 5px;
+
+}
+
+
+.TextBoxDiv input{
+    border:solid 1px #E1E1E1;
+}
+
+textarea {
+    height:180px;
+}
+
+
+
+div.input-block select {
+    width:296px;
+}
+
+div.input-block{
+    float:none;
+}
+
+
+
+.submit-block{
+    text-align: right;
+    padding: 50px 0;
+    clear: both;
+}
+
+.submit-block input{
+
+    width: 100px;
+    float: right;
+
+}
+
+.submit_block{
+    margin:33px 1px;
+
+}
+
+
+div.input-block input.add-remove-bouuon {
+    background: #4EC048;
+    color:#FFFFFF;
+    float:left;
+    width:74px;
+}
+div.input-block input#removeButton{
+    background:#9c9c9c;
+    margin-left:10px;
+}
+
+
+
+div.submit_block input.next-btn {
+    background:url("../images/sprit-icon.png") no-repeat -12px -532px #4EC048;
+    color:#FFFFFF;
+    padding:9px 37px 9px 12px;
+    width:100px;
+}
+
+.containt{
+    padding:0 20px;
+}
+
+div.input-block dl.accordion dt a {
+    
+    display:block;
+    font-size:1.5em;
+}
+
+div.containt div.input-block dl.accordion dt {
+    clear:both;
+    margin-top:20px;
+}
+
+div.input-block dl.accordion dd{
+    padding:10px;
+    margin:0;
+}
+
+.file-upload input{
+    display:block;
+    float:none;
+}
+
+dl.accordion span.check_box_block {
+}
+
+dl.accordion span.check_box_block {
+    display:block;
+    float:left;
+    font-size:13px;
+    margin-bottom:10px;
+    min-width:150px;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    padding:0;
+    margin:0;
+    width:10px;
+    margin-right:10px;
+
+}
+
+
+.sub_block {
+    float:left;
+    width:303px;
+}
+
+.sub_block input{
+    width:200px;
+}
+
+.sub_block input[type="radio"]{
+    width:10px;
+}
+div.sub_block.radio label{
+    width:20px;
+}
+
+.TextBoxDiv{
+    margin-top:12px;
+}
+.cadd{
+    width: 430px;
+}
+#u-settings{
+    float: left;
+    list-style: none outside none;
+    width: 161px;
+}
+#ujobs{
+    float: left;
+}
+
+
+
+
+/* green */
+.green {
+    color: #e8f0de;
+    border: solid 1px #538312;
+    background: #64991e;
+    background: -webkit-gradient(linear, left top, left bottom, from(#7db72f), to(#4e7d0e));
+    background: -moz-linear-gradient(top,  #7db72f,  #4e7d0e);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#7db72f', endColorstr='#4e7d0e');
+}
+.green:hover {
+    background: #538018;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6b9d28), to(#436b0c));
+    background: -moz-linear-gradient(top,  #6b9d28,  #436b0c);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#6b9d28', endColorstr='#436b0c');
+}
+.green:active {
+    color: #a9c08c;
+    background: -webkit-gradient(linear, left top, left bottom, from(#4e7d0e), to(#7db72f));
+    background: -moz-linear-gradient(top,  #4e7d0e,  #7db72f);
+    filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e7d0e', endColorstr='#7db72f');
+}
+
+/*----- Start Style for ____ -----*/
+
+/*----- End Style for ____ -----*/

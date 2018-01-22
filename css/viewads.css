@@ -1,0 +1,84 @@
+/*----- Start Style for common -----*/
+#left-col:after,#icon:afetr,#sel_icon:after { 
+    content: "."; 
+    visibility: hidden; 
+    display: block; 
+    height: 0; 
+    clear: both;
+}
+
+#main-header {
+
+    background-image: none;
+    background-color: #FFFFFF !important;
+    width:100%;
+}
+
+#main-header {
+    border-bottom: 8px solid #0000dd;
+    height: 80px;
+}
+
+#main-header {
+    height: 80px;
+}
+#main-footer {
+    background-image: none;
+    height: 80px;
+    margin: 0 auto;
+    padding: 8px 20px;
+    position: relative;
+    width: 100%;
+}
+#main-containt{
+    width: 100%;
+}
+
+#showcount{
+    font-size: 54px;
+    font-weight: bold;
+    left: 650px;
+    position: absolute;
+    top: 5px;
+}
+#icon{
+    list-style: none outside none;
+    margin: 0;
+}
+#icon li {
+    float: left; 
+    margin: 0 0 0 25px;
+}
+#icon li img{
+    width: 50px; 
+}
+#sel_icon{
+    list-style: none outside none;
+    margin: 0;
+}
+#sel_icon li{
+
+}
+#sel_icon li img{
+    margin: 0 0 0 89px;
+    width: 50px; 
+}
+#showselect{
+
+    font-size: 14px;
+    left: 335px;
+    position: absolute;
+    top: 0px;
+}
+#pos{
+    color:green; 
+    font-size: 14px;
+}
+#neg1{
+    color:red;
+    font-size: 14px;
+}
+#neg2{
+    color:red;
+    font-size: 14px;
+}
