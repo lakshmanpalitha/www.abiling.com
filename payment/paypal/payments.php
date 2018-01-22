@@ -46,7 +46,7 @@ if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
     // Append querystring with custom field
     //$querystring .= "&custom=".USERID;
     // Redirect to paypal IPN
-    $pr->redirect('https://www.paypal.com/cgi-bin/webscr' . $querystring);
+    $pr->redirect('https://www.sandbox.paypal.com/cgi-bin/webscr' . $querystring);
     exit();
 } else {
 
@@ -75,7 +75,7 @@ if (!isset($_POST["txn_id"]) && !isset($_POST["txn_type"])) {
     $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
     $header .= "Content-Length: " . strlen($req) . "\r\n\r\n";
 
-    $fp = fsockopen('http://www.paypal.com', 80, $errno, $errstr, 30);
+    $fp = fsockopen('http://www.sandbox.paypal.com', 80, $errno, $errstr, 30);
 
     if (!$fp) {
         // HTTP ERROR

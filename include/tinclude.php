@@ -10,7 +10,6 @@ include('../../classes/utiliti/query.class.php');
 include('../../classes/utiliti/validation.class.php');
 include('../../classes/utiliti/error.class.php');
 include('../../classes/utiliti/encrypt.class.php');
-include('../../classes/utiliti/email.class.php');
 include('../../classes/account/adtaccount.class.php');
 include('../../classes/account/advaccount.class.php');
 include('../../classes/account/advadload.class.php');
@@ -50,5 +49,4 @@ $set=new settings();
 $adtsum=new adtsummary();
 $his=new history();
 $advpay=new advpaymentclass();
-$email = new email();
 ?>

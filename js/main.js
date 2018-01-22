@@ -4,12 +4,7 @@ jQuery(document).ready(function($) {
 
     //registration form birthday jpicker
     if ($(".datepicker").length > 0){
-        $('.datepicker').datepicker({
-            dateFormat: 'yy-mm-dd',
-            changeMonth: true,
-            changeYear: true,
-            yearRange: '-125:+125'
-        });
+    //$('.datepicker').datepicker();
     }
 	
     // Add validation to form
@@ -127,9 +122,9 @@ jQuery(document).ready(function($) {
         alert(msg);
     });
 
-//close documant ready
+    //close documant ready
 
-//if country all check
+    //if country all check
    
 });
 

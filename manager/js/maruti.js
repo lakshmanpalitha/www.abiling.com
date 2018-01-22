@@ -159,7 +159,7 @@ $(document).ready(function(){
     $('#style-switcher a').click(function()
     {
         var style = $(this).attr('href').replace('#','');
-        $('.skin-color').attr('href','css/microsola.'+style+'.css');
+        $('.skin-color').attr('href','css/maruti.'+style+'.css');
         $(this).siblings('a').css({
             'border-color':'transparent'
         });

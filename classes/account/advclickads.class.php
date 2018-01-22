@@ -85,7 +85,6 @@ class advclickads {
         if (!$adid) {
             return false;
         }
-
         $en_id = (int) $this->en->decode($adid);
         $pakage = $this->con->queryUniqueValue("SELECT pakage FROM adviewer_register WHERE account_id='" . $this->userId . "'");
         if ($pakage == 1) {
@@ -109,16 +108,8 @@ class advclickads {
                 return false;
             }
         } else {
-            if (!$this->con->execute("UPDATE SET no_ads=no_ads+1,amount=amount+" . $amountAd . " WHERE account_id='" . $this->userId . "'")) {
+            if (!$this->con->execute("UPDATE SET amount=amount+" . $amountAd . " WHERE account_id='" . $this->userId . "'")) {
                 return false;
-            }
-            $ads_point = $this->con->queryUniqueValue("SELECT no_ads FROM adviewer_account WHERE account_id ='" . $this->userId . "' ");
-            $advsum = new advsummary($this->userId);
-            $set = new settings();
-            if ($ads_point && $ads_point > $set->getUserPointsLimit($this->advsum->getCurruntPakage())) {
-                if (!$this->con->execute("UPDATE SET no_ads=0,points=points+1 WHERE account_id='" . $this->userId . "'")) {
-                    return false;
-                }
             }
         }
         // $this->unsetAdIsRunning($adid);

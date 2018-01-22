@@ -89,7 +89,6 @@ $advad->setAd(0)
                 </div> 
 
                 <div id="left-col">
-                      <h2 class="xp_ads">Available  Advertisements</h2> 
                     <?php
                     $ads = $advad->loadAds();
                     if ($ads) {
@@ -112,8 +111,6 @@ $advad->setAd(0)
                             </div>
                             <?php
                         }
-                    } else {
-                        echo "No ads";
                     }
                     ?>
 

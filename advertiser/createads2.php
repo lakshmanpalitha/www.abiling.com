@@ -146,18 +146,10 @@ if ($read->get("pay", "POST")) {
                                         <dt><a href=""><h3>User Settings</h3></a></dt>
                                         <dd id="p3">
                                             <ul id="u-settings">
-                                                 <li><label><input type="radio" name="pakage" value="100"/>All</label></li>
-                                                <?php
-                                                $pak = $set->getPakageSettings();
-                                                if ($pak) {
-
-                                                    foreach ($pak as $p) {
-                                                        ?>
-                                                        <li><label><input type="radio" name="pakage" value="<?php echo $p->id ?>" /><?php echo $p->name ?></label></li>  
-
-
-                                                    <?php }
-                                                } ?>
+                                                <li><label><input type="radio" name="pakage" value="100"/>All</label></li>
+                                                <li><label><input type="radio" name="pakage" value="1" />Gold</label></li>  
+                                                <li><label><input type="radio" name="pakage" value="2" />Silver</label></li>  
+                                                <li><label><input type="radio" name="pakage" value="3" />Platinum</label></li>  
                                             </ul>
                                             <ul id="u-settings">
                                                 <li><label><input type="radio" name="gender" value="MF"/>All</label></li>

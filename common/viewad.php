@@ -31,7 +31,6 @@ $icon = $pr->createVerifyIcons();
         <link rel="stylesheet" type="text/css" href="../css/viewads.css">
         <?php include ("../include/header_js.php"); ?>
 
-
     </head>
     <body>
 
@@ -88,72 +87,25 @@ $icon = $pr->createVerifyIcons();
         </div> 
         <div id="main-containt-wrapper">
             <div id="main-containt">
-                <div id="ytplayer"></div>
                 <?php
                 $type = $con->queryUniqueObject("SELECT * FROM ads_fool WHERE ads_id='" . $de_id . "'");
                 if (!$type) {
                     $pr->redirect("my_ads.php");
                 }
                 if ($type->adstype == 2) {
-                    //check url is you tube
-                    $check1 = explode(".", $type->url);
-                    if ($check1) {
-                        if ($check1[1] == "youtube") {
-                            ?>
-                            <style>
-                                body,
-                                html{
-                                    padding:0;
-                                    margin:0;
-                                    overflow:hidden;
-                                    background:#000;
-                                }
-                                #ytplayer{
-                                    position:absolute;
-                                    top:0;
-                                    left:0;
-                                    width:100%;
-                                    height:1000px;
-                                    z-index:1000;
-                                    zoom:1;
-                                    background:url(../images/dot.png) repeat;
-                                }
-                                #youtube-wrapper{
-                                    background-color: #000000;
-                                    width: 853px;
-                                    margin: 80px auto 0 auto;
-                                }
-                                iframe body {background-color:#000;}
-                            </style>
-                            <?php
-                            $check2 = explode("?", $type->url);
-                            if ($check2) {
-                                $check3 = explode("=", $check2[1]);
-                                if ($check3[0] == 'v') {
-                                    $id = $check3[1];
-                                    if ($id) {
-                                        $new_url = "http://www.youtube.com/embed/" . $id . "?modestbranding=1&controls=0&loop=1&autoplay=1&rel=0&showinfo=0";
-                                    }
-                                }
-                            }
-                            ?>
-                            <div id="youtube-wrapper"><iframe width="853px" height="480px"  src="<?php echo $new_url ?>" frameborder="0"></iframe></div>
-                            <?php
-                        } else {
-                            ?>
-                            <iframe src="<?php echo $type->url ?>" width="100%"  height="1000px" scrolling="yes" frameborder="0"></iframe> 
-                        <?php }
-                    } ?>
+                    ?>
+                    <iframe src="<?php echo $type->url ?>" width="100%" height="1000px" scrolling="no" frameborder="0"></iframe> 
                 <?php } else { ?>
-                    <iframe src="ad.php?id1=<?php echo $read->get("id1", "GET"); ?>" width="100%" height="1000px" scrolling="yes" frameborder="0"></iframe> 
+                    <iframe src="ad.php?id1=<?php echo $read->get("id1", "GET"); ?>" width="100%" height="1000px" scrolling="no" frameborder="0"></iframe> 
                     <?php
                 }
                 ?>
+
             </div>
 
             <div id="main-footer-wrapper">
                 <div id="main-footer">
-                    <?php //include ("../include/main_footer.php"); ?> 
+                    <?php include ("../include/main_footer.php"); ?> 
                 </div>
             </div>
 
@@ -170,7 +122,7 @@ $icon = $pr->createVerifyIcons();
                         var timerID = setInterval(function() {
                             if(count > 1){
                                 $('#showcount').html(Math.floor(count-=1));
-                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                
                             }
                             else{
                                 clearInterval(timerID); 
@@ -182,46 +134,39 @@ $icon = $pr->createVerifyIcons();
                                 $("#icon").css("display","none");
                                 $("#sel_icon").css("display","none");
                                 $('#showcount').html("");
-                                               
+                               
                             } 
                         }, 2300 );
-                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                
                     });
                 </script>
                 <?php
             } else {
+                
                 ?>
                 <script>
                     jQuery(document).ready(function($) {
-                                        
+                        
                         $("#showselect").css("display","none");
                         var count = <?php echo $type->ad_run_time; ?>;
-                                                                                         
+                                                                         
                         var timerID = setInterval(function() {
                             if(count > 1){
                                 $('#count').html(Math.floor(count-=1));
-                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                    
                             }
                             else{
                                 clearInterval(timerID);
-                                                
-                                                                                                                                        
-                                                
-                                                 
-                                $('#showselect').css("display","block");
-                                $("#neg1").css("display","none");
-                                $("#neg2").css("display","none");
-                                $("#pos").css("display","none");
-                                $("#count").css("display","none");
-                                $("#icon").css("display","block");
-                                $("#sel_icon").css("display","block");
-                                                      
-                                                   
-                                                
-                                                                                                                                                                    
+                                        $('#showselect').css("display","block");
+                                        $("#neg1").css("display","none");
+                                        $("#neg2").css("display","none");
+                                        $("#pos").css("display","none");
+                                        $("#count").css("display","none");
+                                        $("#icon").css("display","block");
+                                        $("#sel_icon").css("display","block");
                             } 
                         }, 2300 );
-                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                    
                     });
                 </script>
             <?php } ?>

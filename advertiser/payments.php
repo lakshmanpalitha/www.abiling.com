@@ -156,11 +156,7 @@ if (!$pr->getSession("adt")) {
                                             <td></td>
                                             <td style="text-align:right;"><b><font color="#FF0000" size="3px">$ <?php echo sprintf("%01.2f", ($full_tot)) ?></font></td>
                                         </tr>
-                                    <?php }else{ ?>
-                                         <tr>
-                                          <td><h2>No Payments</h2></td>
-                                         </tr>
-                                        <?php } ?>
+                                    <?php } ?>
                                 </tbody></table>
 
                         </div>

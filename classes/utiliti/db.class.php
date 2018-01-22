@@ -17,8 +17,8 @@ class DB {
     private $er;
 
     /** Connect to a MySQL database to be able to use the methods below. */
+    //function DB($base = 'microsq0_panora', $server = 'localhost', $user = 'microsq0_panora', $pass = 'LRvPSLd([Uzk') {
     function DB($base = 'microsq0_abiling', $server = 'localhost', $user = 'microsq0_pvtltd', $pass = 'fCo-MJpOuTOH') {
-    //function DB($base = 'panora', $server = 'localhost', $user = 'root', $pass = '') {
         $this->mtStart = $this->getMicroTime();
         $this->nbQueries = 0;
         $this->lastResult = NULL;

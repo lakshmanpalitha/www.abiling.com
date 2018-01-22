@@ -16,7 +16,6 @@ class advclass {
         $this->con = new DB();
         $this->er = new errormsg();
         $this->pro = new process();
-        $this->en = new Encryption();
         if ($id) {
             $this->userId = $id;
         } else {
@@ -70,7 +69,7 @@ class advclass {
             throw new Exception('Something really gone wrong', 0, $e);
         }
         unset($data['repassword']);
-        $data['password'] = $this->en->encode($data['password']);
+        $data['password'] = md5($data['password']);
         $data['account_type'] = 2;
         $data['register_date'] = $this->date;
         $data['_18'] = $_18;
@@ -113,7 +112,6 @@ class advclass {
     public function logout() {
         $this->pro->unsetSession("adv");
         $this->pro->unsetSession("advac");
-        $this->pro->unsetSession("loginusername");
         $this->pro->redirect("../index.php");
     }
 

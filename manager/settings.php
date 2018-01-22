@@ -19,14 +19,6 @@ if ($read->get("edit_set_pak", "POST")) {
 
     $set->updatePakage();
 }
-if ($read->get("edit_set_referal", "POST")) {
-
-    $set->updateReferal();
-}
-if ($read->get("edit_set_point", "POST")) {
-
-    $set->updatePoints();
-}
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +51,7 @@ if ($read->get("edit_set_point", "POST")) {
                     </ul>
                 </li>-->
 <!--                <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>-->
-                <li class=""><a title="" href="index.php?id1=logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+                 <li class=""><a title="" href="index.php?id1=logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
             </ul>
         </div>
         <div id="search">
@@ -116,10 +108,8 @@ if ($read->get("edit_set_point", "POST")) {
 
                                         <input type="submit" name="fee_ad" value="Fee For Ad Submit" class="btn btn-success" /> 
                                         <input type="submit" name="set_ad" value="Settings Member Ads" class="btn btn-success" /> 
-                                        <input type="submit" name="set_pak" value="Settings Account Type" class="btn btn-success" /> 
+                                        <input type="submit" name="set_pak" value="Settings Pakage" class="btn btn-success" /> 
                                         <input type="submit" name="limit_withdraw" value="Settings Withdraw Limit" class="btn btn-success" /> 
-                                        <input type="submit" name="Referal_Link" value="Settings Leferal Link" class="btn btn-success" />
-                                        <input type="submit" name="panora_points" value="Settings Panora Points" class="btn btn-success" />
                                     </div>
                                 </form>
                             </div>
@@ -216,7 +206,7 @@ if ($read->get("edit_set_point", "POST")) {
                                         <span class="icon">
                                             <i class="icon-align-justify"></i>									
                                         </span>
-                                        <h5>Settings Account Type</h5>
+                                        <h5>Settings Pakage</h5>
                                     </div>
                                     <?php $set_pak = $set->getPakageSettings(); ?>
                                     <form action="settings.php" method="post">
@@ -224,7 +214,7 @@ if ($read->get("edit_set_point", "POST")) {
                                             <table class="table table-bordered data-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Account Type Name</th>
+                                                        <th>Pakage Name</th>
                                                         <th>Fee For Register</th>
 
 
@@ -267,141 +257,25 @@ if ($read->get("edit_set_point", "POST")) {
                                         <span class="icon">
                                             <i class="icon-align-justify"></i>									
                                         </span>
-                                        <h5>Settings Withdraw</h5>
+                                        <h5>Withdraw Limit</h5>
                                     </div>
-                                    <?php $set_ad = $set->getWithdrawSettings(); ?>
                                     <form action="settings.php" method="post">
                                         <div class="widget-content nopadding">
                                             <table class="table table-bordered data-table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Account Type</th>
-                                                        <th>Amount Limit</th>
+                                                        <th>Fee</th>
 
 
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php
-                                                    if ($set_ad) {
-                                                        $i = 1;
-                                                        foreach ($set_ad as $c) {
-                                                            ?>
-                                                            <tr class="gradeX">
-                                                                <td> <input type="hidden" name="set[<?php echo $i ?>][pakage]" value="<?php echo $c->id; ?>" class="span6" /><?php echo $c->name; ?> member</td>
-                                                                <td> <input type="text" name="set[<?php echo $i ?>][limit]" value="<?php echo $c->w_limit; ?>" class="span6" /> </td>
-                                                            </tr>
-                                                            <?php
-                                                            $i++;
-                                                        }
-                                                    } else {
-                                                        echo"<tr class='gradeX'><td>No Settings</td></tr>";
-                                                    }
-                                                    ?>
+                                                <td>$<input type="text" name="fee" value="<?php if ($fee = $set->getWithdrawSettings())
+                            echo $fee ?>" class="span6" /> </td>
                                                 </tbody>
                                             </table>
                                             <div class="form-actions"> 
                                                 <input type="submit" name="edit_set_withdraw" value="EDIT" class="btn btn-success" /> 
-                                                <input type="submit" name="cancel" value="Cancel" class="btn btn-success" /> 
-
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        <?php } ?>
-                        <?php if ($read->get("Referal_Link", "POST")) { ?>
-                            <div class="span4">
-                                <div class="widget-box">
-                                    <div class="widget-title">
-                                        <span class="icon">
-                                            <i class="icon-align-justify"></i>									
-                                        </span>
-                                        <h5>Settings Referal</h5>
-                                    </div>
-                                    <?php $set_ad = $set->getWithdrawSettings(); ?>
-                                    <form action="settings.php" method="post">
-                                        <div class="widget-content nopadding">
-                                            <table class="table table-bordered data-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Account Type</th>
-                                                        <th>Fee per Referal</th>
-
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    if ($set_ad) {
-                                                        $i = 1;
-                                                        foreach ($set_ad as $c) {
-                                                            ?>
-                                                            <tr class="gradeX">
-                                                                <td> <input type="hidden" name="set[<?php echo $i ?>][pakage]" value="<?php echo $c->id; ?>" class="span6" /><?php echo $c->name; ?> member</td>
-                                                                <td> <input type="text" name="set[<?php echo $i ?>][limit]" value="<?php echo $c->r_amount; ?>" class="span6" /> </td>
-                                                            </tr>
-                                                            <?php
-                                                            $i++;
-                                                        }
-                                                    } else {
-                                                        echo"<tr class='gradeX'><td>No Settings</td></tr>";
-                                                    }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                            <div class="form-actions"> 
-                                                <input type="submit" name="edit_set_referal" value="EDIT" class="btn btn-success" /> 
-                                                <input type="submit" name="cancel" value="Cancel" class="btn btn-success" /> 
-
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        <?php } ?>
-                         <?php if ($read->get("panora_points", "POST")) { ?>
-                            <div class="span4">
-                                <div class="widget-box">
-                                    <div class="widget-title">
-                                        <span class="icon">
-                                            <i class="icon-align-justify"></i>									
-                                        </span>
-                                        <h5>Settings Points</h5>
-                                    </div>
-                                    <?php $set_ad = $set->getWithdrawSettings(); ?>
-                                    <form action="settings.php" method="post">
-                                        <div class="widget-content nopadding">
-                                            <table class="table table-bordered data-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Account Type</th>
-                                                        <th>How many ads may be click?(for one point)</th>
-
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    if ($set_ad) {
-                                                        $i = 1;
-                                                        foreach ($set_ad as $c) {
-                                                            ?>
-                                                            <tr class="gradeX">
-                                                                <td> <input type="hidden" name="set[<?php echo $i ?>][pakage]" value="<?php echo $c->id; ?>" class="span6" /><?php echo $c->name; ?> member</td>
-                                                                <td> <input type="text" name="set[<?php echo $i ?>][limit]" value="<?php echo $c->ads_p_point; ?>" class="span6" /> </td>
-                                                            </tr>
-                                                            <?php
-                                                            $i++;
-                                                        }
-                                                    } else {
-                                                        echo"<tr class='gradeX'><td>No Settings</td></tr>";
-                                                    }
-                                                    ?>
-                                                </tbody>
-                                            </table>
-                                            <div class="form-actions"> 
-                                                <input type="submit" name="edit_set_point" value="EDIT" class="btn btn-success" /> 
                                                 <input type="submit" name="cancel" value="Cancel" class="btn btn-success" /> 
 
                                             </div>

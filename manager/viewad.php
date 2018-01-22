@@ -79,7 +79,7 @@ if (!$de_id) {
                     ?>
                     <iframe src="<?php echo $type->url ?>" width="100%" scrolling="no" frameborder="0"></iframe> 
                 <?php } else { ?>
-                    <iframe src="ad.php?id1=<?php echo $read->get("id1", "GET"); ?>" width="100%" height="2500px" scrolling="no" frameborder="0"></iframe> 
+                    <iframe src="ad.php?id1=<?php echo $read->get("id1", "GET"); ?>" width="100%" height="1000px" scrolling="no" frameborder="0"></iframe> 
                     <?php
                 }
                 ?>

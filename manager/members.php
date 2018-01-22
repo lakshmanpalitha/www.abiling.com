@@ -100,13 +100,11 @@ if ($read->get("id2", "GET") == 'block' && $id = $read->get("id1", "GET")) {
                                             <th>First Name</th>
                                             <th>Last Name</th>
                                             <th>Email</th>
-                                            <th>user Name</th>
-                                            <th>Password</th>
                                             <th>Phone</th>
                                             <th>Country</th>
                                             <th>Payment</th>
                                             <th>Account</th>
-                                            <th>Account Type</th>
+                                            <th>Pakage</th>
                                             <th>Register Date</th>
                                             <th>Action</th>
                                             <th>Requests</th>
@@ -124,8 +122,6 @@ if ($read->get("id2", "GET") == 'block' && $id = $read->get("id1", "GET")) {
                                                     <td><?php echo $m->first_name ?></td>
                                                     <td><?php echo $m->last_name ?></td>
                                                     <td><?php echo $m->email ?></td>
-                                                    <td><?php echo $m->user_name ?></td>
-                                                    <td><?php echo $en->decode($m->password) ?></td>
                                                     <td><?php echo $m->phone ?></td>
                                                     <td><?php echo $con->queryUniqueValue("SELECT name FROM country WHERE code='" . $m->country . "'"); ?></td>
                                                     <td><?php echo ($m->ispay ? "<i class='icon-ok'></i>" : "<i class='icon-ban-circle'></i>") ?></td>
@@ -149,9 +145,8 @@ if ($read->get("id2", "GET") == 'block' && $id = $read->get("id1", "GET")) {
                                                         <a class="tip-top" data-original-title="Delete Ad" onclick='return getConfirmation();' href="members.php?id2=del&id1=<?php echo $m->account_id ?>"><i class="icon-remove"></i></a>
 
                                                     </td>
-                                                    <td> <?php $advsum = new advsummary($m->account_id);
-                                                if ($advsum->checkRequestForUpgrade()) { ?><a href="upgrade.php?id1=<?php echo $m->account_id ?>"><i class="icon-user"></i></a>&nbsp &nbsp<?php } ?>
-                                                        <?php if ($advsum->checkRequestForWithdraw()) { ?><a href="mpayments.php?id1=<?php echo $m->account_id ?>"><i class="icon-briefcase"></i></a><?php } ?>
+                                                    <td> <?php $advsum = new advsummary($m->account_id); if ($advsum->checkRequestForUpgrade()) { ?><a href="upgrade.php?id1=<?php echo $m->account_id ?>"><i class="icon-user"></i></a>&nbsp &nbsp<?php } ?>
+                                                         <?php if ($advsum->checkRequestForWithdraw()) { ?><a href="mpayments.php?id1=<?php echo $m->account_id ?>"><i class="icon-briefcase"></i></a><?php } ?>
                                                     </td>
                                                 </tr>
                                             <?php }

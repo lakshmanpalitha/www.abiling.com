@@ -13,7 +13,6 @@ class adtclass {
         $this->er = new errormsg();
         $this->pro = new process();
         $this->read = new read();
-        $this->email = new email();
         if ($id) {
             $this->userId = $id;
         } else {
@@ -54,7 +53,6 @@ class adtclass {
             }
         }
         $this->er->clearFromvalue();
-        $pass = $data['password'];
         $data['password'] = md5($data['password']);
         $data['register_date'] = $this->date;
         $data['account_type'] = 3;
@@ -71,40 +69,7 @@ class adtclass {
 
 
 
-        $message = "<html><body>";
-
-        $massage.="<p>Welcome to the best advertising provider panoraadvertising.com!</p></br>";
-
-        $massage.="<p>You can access members area at:</p></br>";
-        $massage.="<p>http://www.panoraadvertising.com/common/login.php</p></br>";
-
-        $massage.="<p>Login user name: " . $data['user_name'] . "</p></br>";
-        $massage.="<p>Password:" . $pass . "\n";
-
-        $massage.="<p>Our members area allows you to see ads and other account details of your account.</p></br>";
-
-        $massage.="<p>If you have any questions, please contact us and we will be more than happy to assist you.</p></br>";
-
-        $massage.="<p>Thanks and Regards,</p></br>";
-
-        $massage.="<p>www.panoraadvertising.com</p></br>";
-
-        $massage.="<p>+++</p></br>";
-        $massage.="<p>Do not reply to this email, this is automatically generated message.</p></br>";
-        $massage.="<p>+++</p></br>";
-        $message .= "</body></html>";
-        $this->email->setEmail($data['email'], "Activated Account", $massage);
-        $this->email->send();
-         $message=false;
-
-        $nmessage = "<html><body>";
-        $nmassage.="<p>New advertier was regitered.</p></br>";
-        $nmassage.="<p>Name:" . $data['first_name'] . "</p></br>";
-        $nmassage.="<p>Address: " . $data['address'] . "</p></br>";
-        $nmassage.="<p>Phone: " . $data['phone'] . "</p></br>";
-        $nmessage.="</body></html>";
-        $this->email->setEmail("", "New Advertier Registered", $nmassage);
-        $this->email->send();
+        $this->er->createerror("Register Successfully", 0);
         return true;
     }
 

@@ -38,22 +38,12 @@ class adtsummary {
         }
         return $tot;
     }
-
     public function getAllPayments() {
-        $tot = $this->con->queryMultipleObjects("SELECT * FROM advertiser_cashbook ac,submit_ads_info sa WHERE ac.ads_id=sa.ads_id AND sa.account_id='" . $this->userId . "' ");
+        $tot = $this->con->queryMultipleObjects("SELECT * FROM advertiser_cashbook ac,submit_ads_info sa WHERE ac.ads_id=sa.ads_id AND sa.account_id='".$this->userId."' ");
         if (!$tot) {
             return 0;
         }
         return $tot;
-    }
-
-    public function getAdvertiserDetail() {
-        $adt = $this->con->queryUniqueValue("SELECT * FROM  account  WHERE account_id='" . $this->userId . "'");
-        if ($adt) {
-            return $adt;
-        }
-
-        return false;
     }
 
     //load click ads for each member

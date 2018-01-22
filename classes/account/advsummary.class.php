@@ -39,27 +39,6 @@ class advsummary {
         }
         return $pakage->pak;
     }
-    public function getCurruntPoints() {
-        $pakage = $this->con->queryUniqueObject("SELECT points AS p FROM  adviewer_account WHERE account_id='" . $this->userId . "'");
-        if (!$pakage) {
-            return false;
-        }
-        return $pakage->p;
-    }
-    public function getCurruntReferalamount() {
-        $rpakage = $this->con->queryUniqueObject("SELECT ref_amount AS ra FROM  adviewer_account WHERE account_id='" . $this->userId . "'");
-        if (!$rpakage) {
-            return false;
-        }
-        return $rpakage->ra;
-    }
-    public function getCurruntReferalClick() {
-        $cpakage = $this->con->queryUniqueObject("SELECT ref_click AS rc FROM  adviewer_account WHERE account_id='" . $this->userId . "'");
-        if (!$cpakage) {
-            return false;
-        }
-        return $cpakage->rc;
-    }
 
     public function getRegisterDate() {
         $regDate = $this->con->queryUniqueObject("SELECT register_date AS reg FROM  account  WHERE account_id='" . $this->userId . "'");
@@ -125,7 +104,7 @@ class advsummary {
             return 0;
         }
 
-        $limit = $this->set->getUserWithdrawValue($this->getCurruntPakage());
+        $limit = $this->set->getWithdrawSettings();
         if ($aTot > $limit) {
             return ($aTot - $limit);
         } else {
@@ -208,14 +187,7 @@ class advsummary {
 
         return false;
     }
- public function getMemberDetail() {
-        $mem = $this->con->queryUniqueObject("SELECT * FROM  account  WHERE account_id='" . $this->userId . "'");
-        if ($mem) {
-            return $mem;
-        }
 
-        return false;
-    }
     //load click ads for each member
 }
 

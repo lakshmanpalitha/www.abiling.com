@@ -18,7 +18,6 @@ class adsclass {
         $this->pr = new process();
         $this->er = new errormsg();
         $this->qu = new query();
-        $this->email = new email();
 
         $this->acid = $this->pr->getSession("adtac");
     }
@@ -38,15 +37,16 @@ class adsclass {
             }
             if ($curl = $this->read->get("url", "post")) {
                 $c1 = explode(":", $curl);
-
+               
                 if (!$c1[0]) {
                     $this->er->createerror("Invalid Url", 1);
                     return false;
                 }
-                if ($c1[0] != "http") {
+                if ($c1[0]!= "http") {
                     $this->er->createerror("Invalid Url(Missing - http://)", 1);
                     return false;
                 }
+              
             }
             $data['url'] = $this->read->get("url", "post");
         }
@@ -239,32 +239,6 @@ class adsclass {
 
             return false;
         }
-        if ($paymethode == 1) {
-            $me = "Manual";
-        } else if ($paymethode == 2) {
-            $me = "PayPal";
-        } else if ($paymethode == 3) {
-            $me = "online";
-        }
-        $adtsum = new adtsummary();
-        $mem = $adtsum->getAdvertiserDetail();
-        $massage= "Hello! Welcome to the best advertising provider panoraadvertising.com!\r\n";
-        $massage.= "We 've received your request. You can expect a response within 24 hours.\r\n";
-        $massage.= "If you have got any doubt you can send a mail to info@panoraadvertising.com\r\n";
-        $massage.= "Thanks and Regards,";
-        $massage.= "http://www.panoraadvertising.com";
-        $email->setEmail($mem->email, "Verification Mail", $massage);
-        $email->send();
-
-        $massage = "Member account id:" . $mem->account_id . "\r\n";
-        $massage.="Name: " . $mem->first_name . "\r\n";
-        $massage.="Email: " . $mem->email . "\r\n";
-        $massage.="Ad ID: " . $mem->email . "\r\n";
-        $massage.="Amount: " . $amount . "\r\n";
-        $massage.="Pay Date: " . $this->dateTime . "\r\n";
-        $massage.="Pay Method: " . $me . "\r\n";
-        $this->email->setEmail(null, $pq . "payment done", $massage);
-        $this->email->send();
         return true;
     }
 

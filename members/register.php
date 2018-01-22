@@ -45,7 +45,7 @@ if ($read->get("mem_reg_form", "POST")) {
         <div id="main-containt-wrapper">
             <div id="main-containt">
                 <div class="page-title">
-                    <div class="views float-l"><p>Member Registration </p></div>
+                    <div class="views float-l"><p>Advertiser Registration </p></div>
 
                 </div>
                 <div id="messages">
@@ -197,7 +197,8 @@ if ($read->get("mem_reg_form", "POST")) {
 
                                 <div class="input-block">
                                     <label>Birthday:</label>
-<input tabindex="13" value="<?php if ($fromValue) echo $fromValue['bday']; ?>" class="validate[required] datepicker" name="fields_req[bday]" type="text">
+                                    <input tabindex="13" value="<?php if ($fromValue)
+                                            echo $fromValue['bday']; ?>" class="validate[required]"data-date="01-02-2013" data-date-format="yyy-mm-dd" value="" class="datepicker" name="fields_req[bday]" type="text">
                                 </div>
 
                                 <div class="input-block">
@@ -205,14 +206,14 @@ if ($read->get("mem_reg_form", "POST")) {
                                     <select tabindex="14" name="fields_req[gender]" id="gender">
                                         <option value="">-Select Gender-</option>
                                         <option value="M">Male</option>
-                                        <option value="F">Female</option>
+                                        <option value="F">Fmale</option>
                                     </select>
                                 </div>
 
                                 <div class="input-block">
-                                    <label>Select User Type :</label>
+                                    <label>Select Your Account Type :</label>
                                     <select tabindex="15" name="field_int_req[pakage]" id="user-type">
-                                        <option value="">-Select User Type-</option>
+                                        <option value="">-Selec Account Type-</option>
                                         <?php
                                         $pak = $set->getPakageSettings();
                                         if ($pak) {

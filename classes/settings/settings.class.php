@@ -41,12 +41,11 @@ class settings {
         }
         return $set_pak;
     }
-
     public function getPakageName($pak=false) {
-        if (!$pak) {
+        if(!$pak){
             return false;
         }
-        $name = $this->con->queryUniqueValue("SELECT name FROM settings_pakage WHERE id='" . $pak . "'");
+        $name = $this->con->queryUniqueValue("SELECT name FROM settings_pakage WHERE id='".$pak."'");
         if (!$name) {
             return false;
         }
@@ -62,45 +61,11 @@ class settings {
     }
 
     public function getWithdrawSettings() {
-        $fee = $this->con->queryMultipleObjects("SELECT * FROM settings_pakage");
+        $fee = $this->con->queryUniqueValue("SELECT limit_val FROM settings_withdraw");
         if (!$fee) {
             return false;
         }
-
-        return $fee;
-    }
-
-    public function getUserWithdrawValue($pak=false) {
-        if (!$pak) {
-            return false;
-        }
-        $fee = $this->con->queryUniqueValue("SELECT w_limit FROM settings_pakage WHERE id='".$pak."'");
-        if (!$fee) {
-            return false;
-        }
-
-        return $fee;
-    }
-    public function getUserPointsLimit($pak=false) {
-        if (!$pak) {
-            return false;
-        }
-        $p = $this->con->queryUniqueValue("SELECT ads_p_point FROM settings_pakage WHERE id='".$pak."'");
-        if (!$p) {
-            return false;
-        }
-
-        return $fee;
-    }
-    public function getUserReferalLimit($pak=false) {
-        if (!$pak) {
-            return false;
-        }
-        $fee = $this->con->queryUniqueValue("SELECT r_amount FROM settings_pakage WHERE id='".$pak."'");
-        if (!$fee) {
-            return false;
-        }
-
+        
         return $fee;
     }
 
@@ -115,35 +80,11 @@ class settings {
     }
 
     public function updateWithdrawLimit($fee=false) {
-        if (!$set = $this->read->get("set", "POST")) {
+        if (!$fee) {
             return false;
         }
-
-        foreach ($set as $s) {
-
-            $this->con->execute("UPDATE settings_pakage SET w_limit='" . $s['limit'] . "' WHERE id='" . $s['pakage'] . "'");
-        }
-        return true;
-    }
-    public function updateReferal($fee=false) {
-        if (!$set = $this->read->get("set", "POST")) {
+        if (!$this->con->execute("UPDATE settings_withdraw SET limit_val='" . $fee . "'")) {
             return false;
-        }
-
-        foreach ($set as $s) {
-
-            $this->con->execute("UPDATE settings_pakage SET r_amount='" . $s['limit'] . "' WHERE id='" . $s['pakage'] . "'");
-        }
-        return true;
-    }
-    public function updatePoints($fee=false) {
-        if (!$set = $this->read->get("set", "POST")) {
-            return false;
-        }
-
-        foreach ($set as $s) {
-
-            $this->con->execute("UPDATE settings_pakage SET ads_p_point='" . $s['limit'] . "' WHERE id='" . $s['pakage'] . "'");
         }
         return true;
     }
@@ -173,12 +114,10 @@ class settings {
         }
         return true;
     }
-
-    public function addNews() {
+    public function addNews(){
         
     }
-
-    public function getNews() {
+    public function getNews(){
         
     }
 

@@ -1,9 +1,9 @@
 <?php
 include("../include/include.php");
-if (!$pr->getSession("adv")) {
+/*if (!$pr->getSession("adv")) {
     $pr->redirect("../index.php");
     exit();
-}
+}*/
 if ($read->get("action", "GET") == 'logout') {
     $adv->logout();
 }
@@ -41,7 +41,7 @@ if (!$user = $adv->getUser()) {
 <div id="main-containt">
   <div class="page-title">
     <div class="views float-l">
-      <p>Referal Links</p>
+      <p>Contact us</p>
     </div>
     
     
@@ -51,67 +51,56 @@ if (!$user = $adv->getUser()) {
       <div class="containt">
         <div class="contact-wrapper">
  
-
+<p>Please contact us for further information and you can order your products by contacting </p>
 
 <div id="main-content">
-
+  <h2>&nbsp;</h2>
   <div id="adres">
-  <table width="94%" border="0" cellpadding="0" cellspacing="0">
-  <tr>
-    <td width="28%" align="center" valign="top"><img src="../images/rads/ad2.jpg" alt="" width="250" height="250" /></td>
-    <td width="1%" align="center" valign="top">&nbsp;</td>
-    <td width="71%" align="left" valign="top"><textarea name="textarea" id="textarea" cols="45" rows="5"><a href="<?php echo $path?>/members/register.php?id1?<?php echo $en->encode($pr->getSession("advac")) ?>"><img src="<?php echo $path?>/images/rads/ad2.jpg" alt="" width="250" height="250" /></a></textarea></td>
-    </tr>
-  <tr>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="left" valign="top">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="left" valign="top">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="left" valign="top">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="center" valign="top"><img src="../images/rads/ad4.jpg" alt="" width="120" height="120" /></td>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="left" valign="top"><textarea name="textarea2" id="textarea2" cols="45" rows="5"><a href="<?php echo $path?>/members/register.php?id1?<?php echo $en->encode($pr->getSession("advac")) ?>"><img src="<?php echo $path?>/images/rads/ad4.jpg" alt="" width="120" height="120" /></a></textarea></td>
-  </tr>
-  <tr>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="left" valign="top">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="left" valign="top">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="left" valign="top">&nbsp;</td>
-  </tr>
-  <tr>
-    <td align="center" valign="top"><img src="../images/rads/ad3.jpg" alt="" width="100" height="650" /></td>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="left" valign="top"><textarea name="textarea3" id="textarea3" cols="45" rows="5"><a href="<?php echo $path?>/members/register.php?id1?<?php echo $en->encode($pr->getSession("advac")) ?>"><img src="<?php echo $path?>/images/rads/ad3.jpg" alt="" width="100" height="650" /></a></textarea></td>
-  </tr>
-  <tr>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="center" valign="top">&nbsp;</td>
-    <td align="left" valign="top">&nbsp;</td>
-  </tr>
-</table>
+    <table border="0" align="left" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="650" align="left" valign="top"><img src="../images/rads/ad1.jpg" width="650" height="100"></td>
+        <td width="28" align="left" valign="top">&nbsp;</td>
+        <td width="262" align="left" valign="top">&nbsp;</td>
+        </tr>
+     
+    </table>
+    
+    <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="100" align="left" valign="top"><img src="../images/rads/ad3.jpg" width="100" height="650"></td>
+        <td width="40" align="left" valign="top">&nbsp;</td>
+        <td width="800" align="left" valign="top">&nbsp;</td>
+        </tr>
+     
+    </table>
+    
+    <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="250" align="left" valign="top"><img src="../images/rads/ad2.jpg" alt="" width="250" height="250"></td>
+        <td width="428" align="left" valign="top">&nbsp;</td>
+        <td width="262" align="left" valign="top">&nbsp;</td>
+        </tr>
+     
+    </table>
+    
+    <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="120" align="left" valign="top"><img src="../images/rads/ad4.jpg" width="120" height="120"></td>
+        <td width="23" align="left" valign="top">&nbsp;</td>
+        <td width="797" align="left" valign="top">&nbsp;</td>
+        </tr>
+     
+    </table>
+    
+    
 
-  
+
+
+
+
+
   </div>
-
+  <div></div>
 </div>
 
 

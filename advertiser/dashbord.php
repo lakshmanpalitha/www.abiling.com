@@ -108,7 +108,6 @@ if ($read->get("id1", "GET") == 'logout') {
         $ndate = date("Y");
         $value = false;
         $rads = false;
-        $nvalue=false;
         $rads = $con->queryMultipleObjects("SELECT SUM(p.view_time) AS ad,MONTH(p.l_view_date ) AS m FROM adviewer_view_ads p,submit_ads_info s WHERE s.ads_id=p.ads_id AND YEAR(p.l_view_date )='" . $ndate . "' AND s.account_id='" . $pr->getSession("adtac") . "' GROUP BY MONTH(p.l_view_date )");
 
         if ($rads) {

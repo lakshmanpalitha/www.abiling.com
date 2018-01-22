@@ -97,7 +97,7 @@ $(document).ready(function(){
 });
 
 
-microsola = {
+maruti = {
 		// === Tooltip for flot charts === //
 		flot_tooltip: function(x, y, contents) {
 			

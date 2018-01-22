@@ -38,7 +38,25 @@ $icon = $pr->createVerifyIcons();
         <?php include ("../include/header_css.php"); ?>
         <link rel="stylesheet" type="text/css" href="../css/viewads.css">
         <?php include ("../include/header_js.php"); ?>
-
+        <style>
+            body,
+            html{
+                padding:0;
+                margin:0;
+                overflow:hidden;
+                background:#000;
+            }
+            #ytplayer{
+                position:absolute;
+                top:0;
+                left:0;
+                width:100%;
+                height:800px;
+                z-index:1000;
+                zoom:1;
+                background:url(../images/dot.png) repeat;
+            }
+        </style>
 
     </head>
     <body>
@@ -56,12 +74,12 @@ $icon = $pr->createVerifyIcons();
                             <li id="neg_li"></li>
                         </ul>
                         <ul id="neg2" style="display: none;">
-                            <li>Another ad is running</li>
-                            <li>All ready viewed </li>
-                            <li>This is expired</li>
+                            <li>another ad running</li>
+                            <li>ad have viewed in ealy</li>
+                            <li>ad expired</li>
                         </ul>
                         <ul id='pos' style="display: none;">
-                            <li>Success process</li>
+                            <li>success process</li>
                             <li id="pos_li"></li>
                         </ul>
                         <?php
@@ -107,33 +125,6 @@ $icon = $pr->createVerifyIcons();
                     $check1 = explode(".", $type->url);
                     if ($check1) {
                         if ($check1[1] == "youtube") {
-                            ?>
-                            <style>
-                                body,
-                                html{
-                                    padding:0;
-                                    margin:0;
-                                    overflow:hidden;
-                                    background:#000;
-                                }
-                                #ytplayer{
-                                    position:absolute;
-                                    top:0;
-                                    left:0;
-                                    width:100%;
-                                    height:1000px;
-                                    z-index:1000;
-                                    zoom:1;
-                                    background:url(../images/dot.png) repeat;
-                                }
-                                #youtube-wrapper{
-                                    background-color: #000000;
-                                    width: 853px;
-                                    margin: 80px auto 0 auto;
-                                }
-                                iframe body {background-color:#000;}
-                            </style>
-                            <?php
                             $check2 = explode("?", $type->url);
                             if ($check2) {
                                 $check3 = explode("=", $check2[1]);
@@ -145,15 +136,15 @@ $icon = $pr->createVerifyIcons();
                                 }
                             }
                             ?>
-                            <div id="youtube-wrapper"><iframe width="853px" height="480px"  src="<?php echo $new_url ?>" frameborder="0"></iframe></div>
+                            <iframe width="100%" height="1000" src="<?php echo $new_url ?>" frameborder="0" allowfullscreen></iframe>
                             <?php
                         } else {
                             ?>
-                            <iframe src="<?php echo $type->url ?>" width="100%" height="1000px" scrolling="yes" frameborder="0"></iframe> 
+                            <iframe src="<?php echo $type->url ?>" width="100%" height="1000px" scrolling="no" frameborder="0"></iframe> 
                         <?php }
                     } ?>
                 <?php } else { ?>
-                    <iframe src="ad.php?id1=<?php echo $read->get("id1", "GET"); ?>" width="100%" height="1000px" scrolling="yes" frameborder="0"></iframe> 
+                    <iframe src="ad.php?id1=<?php echo $read->get("id1", "GET"); ?>" width="100%" height="1000px" scrolling="no" frameborder="0"></iframe> 
                     <?php
                 }
                 ?>
@@ -162,15 +153,15 @@ $icon = $pr->createVerifyIcons();
 
             <div id="main-footer-wrapper">
                 <div id="main-footer">
-                    <?php //include ("../include/main_footer.php"); ?> 
+<?php include ("../include/main_footer.php"); ?> 
                 </div>
             </div>
 
-            <?php include ("../include/footer_js.php"); ?>
-            <?php
-            if ($isAdBlock) {
-                $cookieTime = ($type->ad_run_time + 10);
-                ?>
+                    <?php include ("../include/footer_js.php"); ?>
+                    <?php
+                    if ($isAdBlock) {
+                        $cookieTime = ($type->ad_run_time + 10);
+                        ?>
                 <script>
                     jQuery(document).ready(function($) {
                         $("#showselect").css("display","none");
@@ -179,7 +170,7 @@ $icon = $pr->createVerifyIcons();
                         var timerID = setInterval(function() {
                             if(count > 1){
                                 $('#showcount').html(Math.floor(count-=1));
-                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                            
                             }
                             else{
                                 clearInterval(timerID); 
@@ -194,13 +185,13 @@ $icon = $pr->createVerifyIcons();
                                 del_cookie('ad');
                             } 
                         }, 2300 );
-                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                            
                     });
                 </script>
-                <?php
-            } else {
-                $cookieTime = ($type->ad_run_time + 10);
-                ?>
+    <?php
+} else {
+    $cookieTime = ($type->ad_run_time + 10);
+    ?>
                 <script>
                     jQuery(document).ready(function($) {
                         var isCookie=false;
@@ -212,16 +203,16 @@ $icon = $pr->createVerifyIcons();
                         }else{
                             isCookie=true;
                         }
-                                                                                                                                                           
+                                                                                                                                                       
                         var timerID = setInterval(function() {
                             if(count > 1){
                                 $('#count').html(Math.floor(count-=1));
-                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                            
                             }
                             else{
                                 clearInterval(timerID);
                                 var getcookie=getCookie("ad");
-                                                                                                                                                    
+                                                                                                                                                
                                 if(!isCookie){
                                     if(!getcookie && getcookie!=<?php echo $de_id ?> ){
                                         tmp('<?php echo $read->get("id1", "GET") ?>');  
@@ -256,13 +247,13 @@ $icon = $pr->createVerifyIcons();
                                     $('#showcount').html("");
                                     $('#neg_li').html("Session error");
                                 }
-                                                                                                                                                                                
+                                                                                                                                                                            
                             } 
                         }, 2300 );
-                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                            
                     });
                 </script>
-            <?php } ?>
+<?php } ?>
             <script>
                 function verifyimg(id){
                    
@@ -285,6 +276,63 @@ $icon = $pr->createVerifyIcons();
                     }
                 }
                     
+                //                function anyrun(adsid){
+                //    
+                //                    var myURL=path+"/load.php?key=anyrun&id="+adsid;
+                //                    $.ajax({    
+                //                        type: "post",
+                //                        url: myURL,
+                //                        dataType: "json",
+                //                        success: function(request) {
+                //                            if(request){
+                //                  
+                //                                var val=request.result.response;
+                //                                if(val=='true'){
+                //                                    $('#showcount').html("Enother ad running");  
+                //                                    unset('<?php echo $read->get("id1", "GET") ?>');
+                //                                }else{
+                //                                    $('#showselect').html(<?php echo $icon[2] ?>);
+                //                                    $("#showselect").css("display","block");
+                //                                    $('#showcount').html(<?php echo $icon[1] ?>); 
+                //                                }
+                //                            }
+                //                        },// End success
+                //                        error: function(){
+                //                            unset('<?php echo $read->get("id1", "GET") ?>');
+                //                            $('#showselect').html("Error");
+                //                            $("#showselect").css("display","block");
+                //                            $('#showcount').html("");
+                //                        }
+                //                    }); // End ajax method 
+                //    
+                //                }
+
+                //                function unset(adsid){
+                //    
+                //                    var myURL=path+"/load.php?key=unset&id="+adsid;
+                //                    $.ajax({    
+                //                        type: "post",
+                //                        url: myURL,
+                //                        dataType: "json",
+                //                        success: function(request) {
+                //                            var val=request.result.response;
+                //                            if(val=='true'){
+                //                               
+                //                            }else{
+                //                                $('#showselect').html("Error");
+                //                                $("#showselect").css("display","block");
+                //                                $('#showcount').html("");
+                //                            }
+                //                        }, // End success
+                //                        error: function(){
+                //                            $('#showselect').html("Error");
+                //                            $("#showselect").css("display","block");
+                //                            $('#showcount').html("");
+                //                        }
+                //                    }); // End ajax method 
+                //    
+                //                }
+
                 function tmp(adsid){
     
                     var myURL=path+"/load.php?key=tmp&id="+adsid;
@@ -398,7 +446,8 @@ $icon = $pr->createVerifyIcons();
                 }
                 
                 function del_cookie(name) {
-                    document.cookie = name +'=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+                    document.cookie = name +
+                        '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
                 } 
                 
    

@@ -1,8 +1,7 @@
 <?php
 $pageName = basename($_SERVER['PHP_SELF']);
-//define('HOME', "http://192.168.137.3/MICROSOLA/www.panora.com");
-//define('HOME', "http://www.panoraadvertising.com");
 define('HOME', "http://microsola.kaasimall.com/web");
+//define('HOME', "http://microsola.com/preview/panoraadvertising/web");
 $adv = false;
 $adt = false;
 $adm = false;
@@ -10,11 +9,11 @@ $adm = false;
 ?>
 <div id="main-header" >
     <div id="logo" class="float-l">
-        <a href="http://www.panoraadvertising.com"><img src="<?php echo HOME ?>/images/logo.png" width="197" height="70" alt="LOGO"></a>
+        <a href="#"><img src="<?php echo HOME ?>/images/logo.png" width="197" height="70" alt="LOGO"></a>
     </div>
     <?php
-    $adv = $pr->getSession("advac");
-    $adt = $pr->getSession("adtac");
+    $adv = $pr->getSession("adv");
+    $adt = $pr->getSession("adt");
     $adm = $pr->getSession("admin");
     if ($adv) {
         $lout = HOME . "/members/dashbord.php?id1=logout";
@@ -39,18 +38,17 @@ $adm = false;
                 }
                 ?>
             </a>
-            
             <?php echo ($pr->checkSession() ? "<a href='" . $lout . "' class='states-link log-out btn'>Logout</a>" : "<a href='" . HOME . "/common/login.php' class='states-link log-out btn'>Login</a>"); ?>
             <?php if ($adv) { ?>
 
                 <a href="<?php echo HOME ?>/members/upgrade.php" class="states-link upgrade">Upgrade&nbsp; +</a>
                 <a href="" class="states-link mony">$ <?php echo sprintf("%01.2f", ($advsum->getTotEarn())); ?></a>
-                <a href="<?php echo HOME ?>/members/dashbord.php" class="states-link user-name user-icon"><span class="icon user-name"><?php echo $pr->getSession("loginusername") ?></span></a>
+                <a href="<?php echo HOME ?>/members/dashbord.php" class="states-link user-name user-icon"><span class="icon user-name"><?php echo $pr->getSession("user") ?></span></a>
                 <a href="<?php echo HOME ?>">Home</a>
             <?php } ?>
             <?php if ($adt) { ?>
 
-                <a href="<?php echo HOME ?>/advertiser/dashbord.php" class="states-link user-name user-icon"><span class="icon user-name"><?php echo $pr->getSession("loginusername") ?></span></a>
+                <a href="<?php echo HOME ?>/advertiser/dashbord.php" class="states-link user-name user-icon"><span class="icon user-name"><?php echo $pr->getSession("user") ?></span></a>
                 <a href="<?php echo HOME ?>">Home</a>
             <?php } ?>
             <!-- Change icon add (user-icon, admin-icon, advertiser-icon)-->

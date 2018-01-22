@@ -35,8 +35,8 @@ if ($read->get("id1", "GET") == 'logout') {
         <div id="main-containt-wrapper">
             <div id="main-containt">
                 <div class="page-title">
-<!--                    <div class="views float-l"><p>Lastest Ad Views  <span><?php echo $advsum->getLatestClickAds(); ?></span></p></div>
-                    <div class="c-run float-r"><p>Currently Runing Ads  <span><?php echo $advsum->getCurruntAds(); ?></span></p></div>-->
+                    <div class="views float-l"><p>Lastest Ad Views  <span><?php echo $advsum->getLatestClickAds(); ?></span></p></div>
+                    <div class="c-run float-r"><p>Currently Runing Ads  <span><?php echo $advsum->getCurruntAds(); ?></span></p></div>
                 </div>
                 <div id="messages">
                     <?php
@@ -104,7 +104,17 @@ if ($read->get("id1", "GET") == 'logout') {
                                 <h4>Membership</h4>
                                 <div class="sub-body">
                                     <span class="left"> <a class="btn"><?php
-                                echo $set->getPakageName($advsum->getCurruntPakage());
+                                if ($advsum->getCurruntPakage() == 1) {
+                                    echo "Sliver";
+                                } else
+                                if ($advsum->getCurruntPakage() == 2) {
+                                    echo "Gold";
+                                } else if ($advsum->getCurruntPakage() == 3) {
+                                    echo "Platinum";
+                                } else {
+                                    $pr->redirect("../index.php");
+                                    exit();
+                                }
                                 ?></a> </span>
                                     <span class="right">Since: <font class="date"><?php echo $advsum->getRegisterDate(); ?></font>  <a href="upgrade.php" class="btn">+</a></span>
                                 </div>
@@ -114,16 +124,12 @@ if ($read->get("id1", "GET") == 'logout') {
                                 <h4>Seen advertisements</h4>
                                 <div class="sub-body">
                                     <span class="left">You</span>
-                                    <span class="right"><?php echo ($advsum->getTotalClicksAds() ? $advsum->getTotalClicksAds() : "0"); ?></span>
+                                    <span class="right"><?php echo ($advsum->getTotalClicksAds()?$advsum->getTotalClicksAds() : "0"); ?></span>
                                 </div>
 
-                            </div>
-                            <div class="block">
-
-                                <h4>Click referal link</h4>
                                 <div class="sub-body">
                                     <span class="left">Your Reffarals</span>
-                                    <span class="right"><?php echo ($advsum->getCurruntReferalClick()>0?$advsum->getCurruntReferalClick():"0"); ?></span>
+                                    <span class="right">0</span>
                                 </div>
                             </div>
 
@@ -138,17 +144,13 @@ if ($read->get("id1", "GET") == 'logout') {
                                     <span class="left">Rental Balance:</span>
                                     <span class="right">$ <?php echo sprintf("%01.2f", ($advsum->getAvailableWithdraw())); ?></span>
                                 </div>
-                                <div class="sub-body">
-                                    <span class="left">Referal Balance:</span>
-                                    <span class="right">$ <?php echo sprintf("%01.2f", ($advsum->getCurruntReferalamount())); ?></span>
-                                </div>
                             </div>
 
                             <div class="block">
                                 <h4>Other</h4>
                                 <div class="sub-body">
                                     <span class="left">Panora Points:</span>
-                                    <span class="right"><?php echo ($advsum->getCurruntPoints()>0?$advsum->getCurruntPoints():"0"); ?></span>
+                                    <span class="right">0</span>
                                 </div>
                             </div>
                         </div>
@@ -176,9 +178,9 @@ if ($read->get("id1", "GET") == 'logout') {
                 <div id="right-col">
                     <div class="main-link-btn">
                         <a href="upgrade.php" class="btn upgrade">Upgrade</a>
-                        <a href="withdraw.php" class="btn manage-payment">Your Payment</a>
-                        <a href="ref_ads.php" class="btn advertise">Referal Link</a>
-
+                         <a href="withdraw.php" class="btn manage-payment">Your Payment</a>
+                        <a href="#" class="btn advertise">Profile</a>
+                       
                     </div>
 
                     <div class="containt-block">
@@ -228,11 +230,10 @@ if ($read->get("id1", "GET") == 'logout') {
             $ndate = date("Y");
             $value = false;
             $rads = false;
-            $nvalue = false;
             $rads = $con->queryMultipleObjects("SELECT SUM(view_time) AS ad,MONTH( l_view_date ) AS m FROM adviewer_view_ads WHERE YEAR( l_view_date )='" . $ndate . "' AND account_id='" . $pr->getSession("advac") . "' GROUP BY MONTH( l_view_date )");
-
+          
             if ($rads) {
-                $value = "['Month', 'Ads'],";
+                $value =  "['Month', 'Ads'],";
                 foreach ($rads as $ad) {
                     if ($ad->m == 1) {
                         $mo = "Jan";
@@ -261,7 +262,7 @@ if ($read->get("id1", "GET") == 'logout') {
                     } else {
                         $mo = "default";
                     }
-                    $value.= "['" . $mo . "', " . (int) $ad->ad . "],";
+                    $value.= "['" . $mo . "', " . (int)$ad->ad . "],";
                 }
                 $nvalue = substr_replace($value, "", -1);
             }
@@ -273,17 +274,17 @@ if ($read->get("id1", "GET") == 'logout') {
                     google.setOnLoadCallback(drawChart);
                     function drawChart() {
                         var data = google.visualization.arrayToDataTable([
-                                       
-    <?php echo $nvalue; ?>
-            ]);
+                               
+                           <?php echo $nvalue ;?>
+                        ]);
 
-            var options = {
-                title: 'Ads Clicks Report - <?php echo $ndate ?>'
-            };
+                        var options = {
+                            title: 'Ads Clicks Report - <?php echo $ndate ?>'
+                        };
 
-            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-            chart.draw(data, options);
-        }
+                        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                        chart.draw(data, options);
+                    }
                 </script>
             <?php } ?>
     </body>

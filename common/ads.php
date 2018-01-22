@@ -82,10 +82,14 @@ include("../include/include.php");
                             //encrypt ad id
 
                             $en_id = $en->encode($a->ads_id);
-                            
+                            if ($a->temp_block == 1) {
+                                $class = "ad-block xp_add_block";
+                            } else {
+                                $class = "ad-block";
+                            }
                             ?>
 
-                            <div class="ad-block">
+                            <div class="<?php echo $class ?>">
                                 <h3><?php echo substr($a->title, 0, 25) ?></h3>
                                 <div class="containt">
                                     <a href="viewad.php?id1=<?php echo $en_id; ?>" target="_blank" class=""><?php echo substr($a->description, 0, 50) ?></a>
