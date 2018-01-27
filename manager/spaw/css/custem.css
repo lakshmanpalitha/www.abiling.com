@@ -1,0 +1,21 @@
+div.widget-content:after,#u-settings:after,#ujobs:after { 
+    content: "."; 
+    visibility: hidden; 
+    display: block; 
+    height: 0; 
+    clear: both;
+}
+
+.widget-content div.widget-box div.widget-content label{
+    float: left;
+    margin-right: 10px;
+    width:378px;
+}
+#u-settings{
+    float: left;
+    list-style: none outside none;
+    width: 161px;
+}
+#ujobs{
+    float: left;
+}

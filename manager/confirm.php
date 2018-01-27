@@ -8,10 +8,11 @@ if (!$id = $read->get("id1")) {
     $pr->redirect("manageads.php");
 }
 
-$name = $con->queryUniqueValue("SELECT ac.first_name AS name FROM submit_ads_info ads_i,account ac WHERE ac.account_id=ads_i.account_id AND ads_i.ads_id='" . $id . "'");
+$name = $con->queryUniqueObject("SELECT ac.first_name AS name,ac.account_id AS id FROM submit_ads_info ads_i,account ac WHERE ac.account_id=ads_i.account_id AND ads_i.ads_id='" . $id . "'");
+
 if ($read->get("pa_ad", "POST")) {
     if ($read->get("amount", "POST")) {
-        if (!$ads->setAdvertiserCashbook($id, $read->get("pay_type", "POST"), $read->get("amount", "POST"), 1, $read->get("comment", "POST"))) {
+        if (!$ads->setAdvertiserCashbook($id, $read->get("pay_type", "POST"), $read->get("amount", "POST"), 1, $read->get("comment", "POST"),0,$name->id)) {
             
         }
     }
@@ -38,7 +39,7 @@ if ($read->get("pa_ad", "POST")) {
 
         <!--Header-part-->
         <div id="header">
-            <h1><a href="dashboard.html">Maruti Admin</a></h1>
+            <h1><a href="dashboard.html">Panora Admin</a></h1>
         </div>
         <!--close-Header-part--> 
 
@@ -48,16 +49,16 @@ if ($read->get("pa_ad", "POST")) {
 
         <!--top-Header-menu-->
         <div id="user-nav" class="navbar navbar-inverse"><ul class="nav">
-                <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
-                <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
+<!--                <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>-->
+<!--                <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a class="sAdd" title="" href="#">new message</a></li>
                         <li><a class="sInbox" title="" href="#">inbox</a></li>
                         <li><a class="sOutbox" title="" href="#">outbox</a></li>
                         <li><a class="sTrash" title="" href="#">trash</a></li>
                     </ul>
-                </li>
-                <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+                </li>-->
+<!--                <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>-->
                 <li class=""><a title="" href="index.php?id1=logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
             </ul>
         </div>
@@ -112,7 +113,7 @@ if ($read->get("pa_ad", "POST")) {
                                         <div class="control-group">
                                             <label class="control-label">Company</label>
                                             <div class="controls">
-                                                <input type="text" value="<?php echo $name ?> "disabled='disabled' class="span6" /> 
+                                                <input type="text" value="<?php echo $name->name ?> "disabled='disabled' class="span6" /> 
                                             </div>
                                         </div>
                                         <div class="control-group">

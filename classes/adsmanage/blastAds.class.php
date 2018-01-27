@@ -10,7 +10,7 @@ class blastAdsclass {
     private $adinfo;
 
     public function __construct($adsId=false) {
-        date_default_timezone_set('Australia/Melbourne');
+        date_default_timezone_set('Asia/Calcutta');
         $this->dateTime = date('Y-m-d H:i:s');
         $this->date = date('Y-m-d');
         $this->second = date('Hs');
@@ -20,6 +20,7 @@ class blastAdsclass {
         $this->er = new errormsg();
         $this->qu = new query();
         $this->adsId = $adsId;
+        $this->email = new email();
         $this->acid = $this->pr->getSession("adtac");
     }
 
@@ -90,6 +91,22 @@ class blastAdsclass {
             return false;
         }
         $this->con->execute("UPDATE submit_ads_info SET isblast=1 WHERE ads_id='" . $data['ads_id'] . "'");
+        $adtsum = new adtsummary();
+        $massage = "Hello! Welcome to the best advertising provider panoraadvertising.com!\r\n";
+        $massage.= "We 've blasted your ad. You can expect a response within 24 hours.\r\n";
+        $massage.= "If you have got any doubt you can send a mail to info@panoraadvertising.com\r\n";
+        $massage.= "Thanks and Regards,";
+        $massage.= "http://www.panoraadvertising.com";
+        $this->email->setEmail($mem->email, "Verfication Email", $massage);
+        $this->email->send();
+
+        $massage="Account id:" . $mem->account_id . "\r\n";
+        $massage.="Company Name: " . $mem->first_name . "\r\n";
+        $massage.="Email: " . $mem->email . "\r\n";
+        $massage.="Ad ID:" . $data['ads_id'] . "\r\n";
+        $massage.="Date:" . $this->date . "\r\n";
+        $this->email->setEmail(null, "Ad go online", $massage);
+        $this->email->send();
         return true;
     }
 

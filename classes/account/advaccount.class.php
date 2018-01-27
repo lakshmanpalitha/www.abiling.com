@@ -10,12 +10,13 @@ class advclass {
     private $userId;
 
     public function __construct($id=false) {
-        date_default_timezone_set('Australia/Melbourne');
+        date_default_timezone_set('Asia/Calcutta');
         $this->date = date('Y-m-d');
         $this->qu = new query();
         $this->con = new DB();
         $this->er = new errormsg();
         $this->pro = new process();
+        $this->en = new Encryption();
         if ($id) {
             $this->userId = $id;
         } else {
@@ -31,23 +32,23 @@ class advclass {
         if (!$data = $this->qu->getFormPost()) {
             return false;
         }
-        $mobile=$data['phone'];
-        if ($mobile[0]!="+") {
+        $mobile = $data['phone'];
+        if ($mobile[0] != "+") {
             $this->er->createerror("Invalid mobile no (Ex : +94112000000)", 1);
             return false;
         }
         $data['address'] = $data['address'] . " " . $data['address2'];
         unset($data['address2']);
-        $isuser = $this->con->queryUniqueObject("SELECT email,first_name FROM account WHERE first_name='" . $data['first_name'] . "' OR email='" . $data['email'] . "'");
+        $isuser = $this->con->queryUniqueObject("SELECT email,first_name FROM account WHERE email='" . $data['email'] . "' AND del_ad=0");
         if ($isuser) {
             if ($isuser->email == $data['email']) {
                 $this->er->createerror("Email " . $data['email'] . " allredy registerd", 1);
                 return false;
             }
-            if ($isuser->first_name == $data['first_name']) {
-                $this->er->createerror("First_name " . $data['first_name'] . " is allredy registerd", 1);
-                return false;
-            }
+//            if ($isuser->first_name == $data['first_name']) {
+//                $this->er->createerror("First_name " . $data['first_name'] . " is allredy registerd", 1);
+//                return false;
+//            }
         }
 
         $pakage = $data['pakage'];
@@ -69,7 +70,7 @@ class advclass {
             throw new Exception('Something really gone wrong', 0, $e);
         }
         unset($data['repassword']);
-        $data['password'] = md5($data['password']);
+        $data['password'] = $this->en->encode($data['password']);
         $data['account_type'] = 2;
         $data['register_date'] = $this->date;
         $data['_18'] = $_18;
@@ -90,15 +91,22 @@ class advclass {
             return false;
         }
 
-        $query = "INSERT INTO adviewer_register(account_id,pakage,account_type,round_date) VALUES('" . $accountId . "','" . $pakage . "','" . $accountType . "','" . $this->date . "')";
+        $referal = 0;
+        if ($val = $this->pro->getSession("referal")) {
+            $referal = $val;
+            $this->pro->unsetSession("referal");
+        }
+        $query = "INSERT INTO adviewer_register(account_id,refer_account_id,pakage,account_type,round_date,reg_amount) VALUES('" . $accountId . "','" . $referal . "','" . $pakage . "','" . $accountType . "','" . $this->date . "','" . $regPrice . "')";
         if (!$this->con->execute($query)) {
 
             return false;
         }
-        $advad = new advadloadclass($accountId);
-        $advad->setAd(0);
-        $his = new history($accountId);
-        $his->addToHistory("Your account registered");
+    
+        $advad = new advadloadclass($accountId,'Y');
+        $advad->setAd();
+       
+        $his = new history($accountId,'Y');
+       // $his->addToHistory("Your account registered");
 
         $this->er->clearFromvalue();
 
@@ -110,8 +118,10 @@ class advclass {
     }
 
     public function logout() {
+        
         $this->pro->unsetSession("adv");
         $this->pro->unsetSession("advac");
+        $this->pro->unsetSession("loginusername");
         $this->pro->redirect("../index.php");
     }
 
@@ -132,6 +142,13 @@ class advclass {
 
     public function deleteAccount() {
         if (!$this->con->execute("UPDATE account SET del_ad=1 WHERE account_id='" . $this->userId . "'")) {
+            return false;
+        }
+        return true;
+    }
+
+    public function setLastLoginDate() {
+        if (!$this->con->execute("UPDATE account SET l_log_date='" . $this->date . "' WHERE account_id='" . $this->userId . "'")) {
             return false;
         }
         return true;

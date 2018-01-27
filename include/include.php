@@ -1,7 +1,6 @@
 <?php
-
 session_start();
-error_reporting(-1);
+error_reporting(0);
 include('../classes/utiliti/db.class.php');
 include('../classes/utiliti/process.class.php');
 include('../classes/utiliti/read.class.php');
@@ -10,6 +9,9 @@ include('../classes/utiliti/query.class.php');
 include('../classes/utiliti/validation.class.php');
 include('../classes/utiliti/error.class.php');
 include('../classes/utiliti/encrypt.class.php');
+include('../classes/utiliti/email.class.php');
+//include('../classes/utiliti/browser.class.php');
+include('../classes/utiliti/pagination.classes.php');
 include('../classes/account/adtaccount.class.php');
 include('../classes/account/advaccount.class.php');
 include('../classes/account/advadload.class.php');
@@ -25,7 +27,7 @@ include('../classes/payment/payment.class.php');
 include('../classes/adsmanage/blastAds.class.php');
 include('../classes/settings/settings.class.php');
 include('../classes/history/history.class.php');
-
+$path = "http://www.panoraadvertising.com";
 $con = new DB();
 $read = new read();
 $pr = new process();
@@ -45,8 +47,17 @@ $en = new Encryption();
 $advsum = new advsummary();
 $adsmanage = new adsmanageclass();
 $adsinfo = new adsinfoclass();
-$set=new settings();
-$adtsum=new adtsummary();
-$his=new history();
-$advpay=new advpaymentclass();
+$set = new settings();
+$adtsum = new adtsummary();
+$his = new history();
+$advpay = new advpaymentclass();
+$email = new email();
+//$bro = new Browser();
+$pg = new pagination();
+
+/* * * PAGINATION SETTING * * */
+$num_results_per_page = 12;
+$num_page_links_per_page = 7;
+$pg_param = "&q=value"; // Ex: &q=value
+
 ?>

@@ -12,7 +12,3 @@
                     <a href="../common/privacypolicy.php">Privacy Policy </a>
                     <a href="../common/help.php">Help</a> 
                 </div>
-
-
-
-                <div class="microsola"><a href="http://www.microsola.com">Web Solution by <span>Microsola</span> </a></div>

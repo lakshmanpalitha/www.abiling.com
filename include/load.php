@@ -2,9 +2,11 @@
 
 header('Access-Control-Allow-Origin: *');
 require_once('include.php');
+$vkey=false;
 
 $key = $read->get('key', "GET");
 $id = $read->get('id', "GET");
+$vkey=$read->get('vkey', "GET");
 
 switch ($key) {
     case 'gState' :
@@ -301,7 +303,7 @@ switch ($key) {
         break;
 
     case 'verifyAd' :
-        $am = $advcad->verifyAdclick($id);
+        $am = $advcad->verifyAdclick($id,$vkey);
         if ($am) {
             $json = '{"result":{';
             $json.='"response":"' . $am . '"';

@@ -5,7 +5,7 @@ class paymentclass {
     private $dateTime;
 
     public function __construct() {
-        date_default_timezone_set('Australia/Melbourne');
+        date_default_timezone_set('Asia/Calcutta');
         $this->dateTime = date('Y-m-d');
         $this->read = new read();
         $this->con = new DB();

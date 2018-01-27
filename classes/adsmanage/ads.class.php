@@ -9,7 +9,7 @@ class adsclass {
     private $acid;
 
     public function __construct() {
-        date_default_timezone_set('Australia/Melbourne');
+        date_default_timezone_set('Asia/Calcutta');
         $this->dateTime = date('Y-m-d H:i:s');
         $this->date = date('Y-m-d');
         $this->second = date('Hs');
@@ -18,6 +18,7 @@ class adsclass {
         $this->pr = new process();
         $this->er = new errormsg();
         $this->qu = new query();
+        $this->email = new email();
 
         $this->acid = $this->pr->getSession("adtac");
     }
@@ -37,16 +38,15 @@ class adsclass {
             }
             if ($curl = $this->read->get("url", "post")) {
                 $c1 = explode(":", $curl);
-               
+
                 if (!$c1[0]) {
                     $this->er->createerror("Invalid Url", 1);
                     return false;
                 }
-                if ($c1[0]!= "http") {
+                if ($c1[0] != "http") {
                     $this->er->createerror("Invalid Url(Missing - http://)", 1);
                     return false;
                 }
-              
             }
             $data['url'] = $this->read->get("url", "post");
         }
@@ -212,7 +212,7 @@ class adsclass {
         return true;
     }
 
-    public function setAdvertiserCashbook($adid=false, $payment=false, $amount=false, $paymethode=false, $comment=false, $txn_id=false) {
+    public function setAdvertiserCashbook($adid=false, $payment=false, $amount=false, $paymethode=false, $comment=false, $txn_id=false,$id=false) {
         if ($adid) {
             $this->adsId = $adid;
         }
@@ -239,6 +239,37 @@ class adsclass {
 
             return false;
         }
+        if ($paymethode == 1) {
+            $me = "Manual";
+        } else if ($paymethode == 2) {
+            $me = "PayPal";
+        } else if ($paymethode == 3) {
+            $me = "online";
+        }
+    
+        $adtsum = new adtsummary($id);
+        $mem = $adtsum->getAdvertiserDetail();
+      
+        $massage = "<html><body>";
+        $massage.="<p>Hello! Welcome to the best advertising provider panoraadvertising.</p></br>";
+        $massage.= "<p>We 've received your request. You can expect a response within 24 hours.</p></br>";
+        $massage.= "<p>If you have got any doubt you can send a mail to info@panoraadvertising.com.</p></br>";
+        $massage.= "<p>Thanks and Regards,</p></br>";
+        $massage.= "<p>http://www.panoraadvertising.com</p></br>";
+        $massage.="</body></html>";
+        $this->email->setEmail($mem->email, "Verification Mail", $massage);
+        $this->email->send();
+
+        $nmassage = "<html><body>";
+        $nmassage.="<p>Member account id:" . $mem->account_id . "</p></br>";
+        $nmassage.="<p>Name: " . $mem->first_name . "</p></br>";
+        $nmassage.="<p>Email: " . $mem->email . "</p></br>";
+        $nmassage.="<p>Ad ID: " . $mem->email . "</p></br>";
+        $nmassage.="<p>Amount: " . $amount . "</p></br>";
+        $nmassage.="<p>Pay Date: " . $this->dateTime . "</p></br>";
+        $nmassage.="<p>Pay Method: " . $me . "</p></br>";
+        $this->email->setEmail(null, $pq . "payment done", $nmassage);
+        $this->email->send();
         return true;
     }
 

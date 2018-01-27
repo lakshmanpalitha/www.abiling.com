@@ -7,6 +7,12 @@ if (!$pr->getSession("adv")) {
 if ($read->get("id1", "GET") == 'logout') {
     $adv->logout();
 }
+$adv->setLastLoginDate();
+$dblog = $advsum->getCurruntLogSession();
+$clog = session_id();
+if ($dblog != $clog) {
+    $er->createerror("Unauthorized login!, you loged in more than one browser.So your ads click is not valid.", 1);
+}
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -35,8 +41,8 @@ if ($read->get("id1", "GET") == 'logout') {
         <div id="main-containt-wrapper">
             <div id="main-containt">
                 <div class="page-title">
-                    <div class="views float-l"><p>Lastest Ad Views  <span><?php echo $advsum->getLatestClickAds(); ?></span></p></div>
-                    <div class="c-run float-r"><p>Currently Runing Ads  <span><?php echo $advsum->getCurruntAds(); ?></span></p></div>
+<!--                    <div class="views float-l"><p>Lastest Ad Views  <span><?php echo $advsum->getLatestClickAds(); ?></span></p></div>
+                    <div class="c-run float-r"><p>Currently Runing Ads  <span><?php echo $advsum->getCurruntAds(); ?></span></p></div>-->
                 </div>
                 <div id="messages">
                     <?php
@@ -98,23 +104,13 @@ if ($read->get("id1", "GET") == 'logout') {
 
                 <div id="mid-col">
                     <div class="containt-block">
-                        <h3>Title Gos Here</h3>
+                        <h3>Your Profile</h3>
                         <div class="containt">
                             <div class="block">
                                 <h4>Membership</h4>
                                 <div class="sub-body">
                                     <span class="left"> <a class="btn"><?php
-                                if ($advsum->getCurruntPakage() == 1) {
-                                    echo "Sliver";
-                                } else
-                                if ($advsum->getCurruntPakage() == 2) {
-                                    echo "Gold";
-                                } else if ($advsum->getCurruntPakage() == 3) {
-                                    echo "Platinum";
-                                } else {
-                                    $pr->redirect("../index.php");
-                                    exit();
-                                }
+                                echo $set->getPakageName($advsum->getCurruntPakage());
                                 ?></a> </span>
                                     <span class="right">Since: <font class="date"><?php echo $advsum->getRegisterDate(); ?></font>  <a href="upgrade.php" class="btn">+</a></span>
                                 </div>
@@ -123,18 +119,46 @@ if ($read->get("id1", "GET") == 'logout') {
                             <div class="block">
                                 <h4>Seen advertisements</h4>
                                 <div class="sub-body">
-                                    <span class="left">You</span>
-                                    <span class="right"><?php echo ($advsum->getTotalClicksAds()?$advsum->getTotalClicksAds() : "0"); ?></span>
+                                    <span class="left">Total Clicks</span>
+                                    <span class="right"><?php echo ($advsum->getTotalClicksAds() ? $advsum->getTotalClicksAds() : "0"); ?></span>
                                 </div>
-
                                 <div class="sub-body">
-                                    <span class="left">Your Reffarals</span>
-                                    <span class="right">0</span>
+                                    <span class="left">Verified Clicks</span>
+                                    <span class="right"><?php echo ($advsum->getTotalValidClicksAds() ? $advsum->getTotalValidClicksAds() : "0"); ?></span>
                                 </div>
+                               
+
                             </div>
+                            <!--                            <div class="block">
+                            
+                                                            <h4>Click referal link</h4>
+                                                            <div class="sub-body">
+                                                                <span class="left">Your Reffarals</span>
+                                                                <span class="right"><?php echo ($advsum->getCurruntReferalClick() > 0 ? $advsum->getCurruntReferalClick() : "0"); ?></span>
+                                                            </div>
+                                                        </div>-->
 
                             <div class="block">
-                                <h4>Account</h4>
+                                <h4>Ads Account</h4>
+                                <div class="sub-body">
+                                    <?php
+                                    $tot = $advsum->getTotEarn();
+                                    $adref = $advsum->getCurruntReferalamount();
+                                    $adc = $advsum->getCurruntReferalClickamount();
+                                    $yac = ($tot - ($adref + $adc));
+                                    ?>
+                                    <span class="left">Your Ads Clicks:</span>
+                                    <span class="right">$ <?php echo sprintf("%01.2f", ($yac)); ?></span>
+                                </div>
+                                <div class="sub-body">
+                                    <span class="left">Refer Members Register :</span>
+                                    <span class="right">$ <?php echo sprintf("%01.2f", ($advsum->getCurruntReferalamount())); ?></span>
+                                </div>
+                                <div class="sub-body">
+                                    <span class="left">Refer Member Ads Clicks :</span>
+                                    <span class="right">$ <?php echo sprintf("%01.2f", ($advsum->getCurruntReferalClickamount())); ?></span>
+                                </div>
+                                <div style=" border-bottom: 1px dotted;margin: 14px 0 0;"></div>
                                 <div class="sub-body">
                                     <span class="left">Main Balance:</span>
                                     <span class="right">$ <?php echo sprintf("%01.2f", ($advsum->getTotEarn())); ?></span>
@@ -144,13 +168,44 @@ if ($read->get("id1", "GET") == 'logout') {
                                     <span class="left">Rental Balance:</span>
                                     <span class="right">$ <?php echo sprintf("%01.2f", ($advsum->getAvailableWithdraw())); ?></span>
                                 </div>
+
+                            </div>
+
+                            <div class="block">
+                                <h4>Main Account</h4>
+                                <div class="sub-body">
+                                    <span class="left">Register Fee:</span>
+                                    <span class="right">$ <?php echo sprintf("%01.2f", ($advsum->getRegFee())); ?></span>
+                                </div>
+
+                                <div class="sub-body">
+                                    <span class="left">Panora Service Charge:</span>
+                                    <span class="right">$ <?php echo sprintf("%01.2f", ($set->getUserHoldLimit($advsum->getCurruntPakage()))); ?></span>
+                                </div>
+                                <div class="sub-body">
+                                    <span class="left">Available Fee:</span>
+                                    <span class="right">$ <?php echo sprintf("%01.2f", ($advsum->getRegFee() - $set->getUserHoldLimit($advsum->getCurruntPakage()))); ?></span>
+                                </div>
+
                             </div>
 
                             <div class="block">
                                 <h4>Other</h4>
                                 <div class="sub-body">
                                     <span class="left">Panora Points:</span>
-                                    <span class="right">0</span>
+                                    <span class="right"><?php echo ($advsum->getCurruntPoints() > 0 ? $advsum->getCurruntPoints() : "0"); ?></span>
+                                </div>
+                            </div>
+                            <?php $prof=$advsum->getUserDetail(); ?>
+                             <div class="block">
+                                <h4>Profile</h4>
+                                <div class="sub-body">
+                                    <span class="left">Full Name</span>
+                                    <span class="right"><?php echo $prof->first_name." ".$prof->last_name  ?></span>
+                                </div>
+                                 <div class="sub-body">
+                                    <span class="left">Email</span>
+                                    <span class="right"><?php echo $prof->email?></span>
                                 </div>
                             </div>
                         </div>
@@ -178,9 +233,9 @@ if ($read->get("id1", "GET") == 'logout') {
                 <div id="right-col">
                     <div class="main-link-btn">
                         <a href="upgrade.php" class="btn upgrade">Upgrade</a>
-                         <a href="withdraw.php" class="btn manage-payment">Your Payment</a>
-                        <a href="#" class="btn advertise">Profile</a>
-                       
+                        <a href="withdraw.php" class="btn manage-payment">Your Withdraw</a>
+                        <a href="ref_ads.php" class="btn advertise">Referal Link</a>
+
                     </div>
 
                     <div class="containt-block">
@@ -230,10 +285,10 @@ if ($read->get("id1", "GET") == 'logout') {
             $ndate = date("Y");
             $value = false;
             $rads = false;
-            $rads = $con->queryMultipleObjects("SELECT SUM(view_time) AS ad,MONTH( l_view_date ) AS m FROM adviewer_view_ads WHERE YEAR( l_view_date )='" . $ndate . "' AND account_id='" . $pr->getSession("advac") . "' GROUP BY MONTH( l_view_date )");
-          
+            $nvalue = false;
+            $rads = $con->queryMultipleObjects("SELECT COUNT(ads_id) AS ad,MONTH( l_view_date ) AS m FROM adviewer_view_ads WHERE YEAR( l_view_date )='" . $ndate . "' AND account_id='" . $pr->getSession("advac") . "' GROUP BY MONTH( l_view_date )");
             if ($rads) {
-                $value =  "['Month', 'Ads'],";
+                $value = "['Month', 'Ads'],";
                 foreach ($rads as $ad) {
                     if ($ad->m == 1) {
                         $mo = "Jan";
@@ -262,7 +317,7 @@ if ($read->get("id1", "GET") == 'logout') {
                     } else {
                         $mo = "default";
                     }
-                    $value.= "['" . $mo . "', " . (int)$ad->ad . "],";
+                    $value.= "['" . $mo . "', " . (int) $ad->ad . "],";
                 }
                 $nvalue = substr_replace($value, "", -1);
             }
@@ -274,17 +329,17 @@ if ($read->get("id1", "GET") == 'logout') {
                     google.setOnLoadCallback(drawChart);
                     function drawChart() {
                         var data = google.visualization.arrayToDataTable([
-                               
-                           <?php echo $nvalue ;?>
-                        ]);
+                                                   
+    <?php echo $nvalue; ?>
+            ]);
 
-                        var options = {
-                            title: 'Ads Clicks Report - <?php echo $ndate ?>'
-                        };
+            var options = {
+                title: 'Ads Clicks Report - <?php echo $ndate ?>'
+            };
 
-                        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-                        chart.draw(data, options);
-                    }
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+        }
                 </script>
             <?php } ?>
     </body>

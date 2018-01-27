@@ -1444,3 +1444,20 @@ form {
         text-align: center;
     }
 }
+.srh-box{
+    float: left;
+    width: 32%;
+}
+#r-li{
+
+}
+#r-li li{
+    float: left;
+    list-style: none outside none;
+    padding: 0 50px 0 0;
+}
+
+#tot{
+    color: red;
+    margin: 0 0 0 6px; 
+}

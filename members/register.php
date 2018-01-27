@@ -8,7 +8,15 @@ if ($read->get("mem_reg_form", "POST")) {
     $id1 = $en->encode($val[0]);
     $id2 = $en->encode(198853);
     $id3 = $en->encode($val[1]);
-    $pr->redirect("../payment/payment.php?id1=" . $id1 . "&id2=" . $id2 . "&id3=" . $id3);
+    //$pr->redirect("../payment/payment.php?id1=" . $id1 . "&id2=" . $id2 . "&id3=" . $id3);
+}
+
+if ($id = $read->get("id1", "GET")) {
+    $advsum = new advsummary($en->decode($id));
+
+    if ($advsum->getMemberDetail()) {
+        $pr->craeteSession("referal", $en->decode($id));
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -45,7 +53,7 @@ if ($read->get("mem_reg_form", "POST")) {
         <div id="main-containt-wrapper">
             <div id="main-containt">
                 <div class="page-title">
-                    <div class="views float-l"><p>Advertiser Registration </p></div>
+                    <div class="views float-l"><p>Member Registration </p></div>
 
                 </div>
                 <div id="messages">
@@ -67,7 +75,12 @@ if ($read->get("mem_reg_form", "POST")) {
                                         </ol>
                                     </div>");
                     }
-                    $fromValue = $er->getFromValue();
+                    if ($read->get("isin", "POST")) {
+
+                        $fromValue = $er->getFromValue();
+                    } else {
+                        $fromValue = false;
+                    }
                     ?>
                 </div> 
                 <div id="left-col">
@@ -78,25 +91,29 @@ if ($read->get("mem_reg_form", "POST")) {
                                 <div class="input-block">
                                     <label>First Name*:</label>
                                     <input tabindex="1"  value="<?php if ($fromValue)
-                        echo $fromValue['first_name']; ?>" class="validate[required]" name="fields_req[first_name]" type="text">
+                        echo $fromValue['first_name'];
+                    ?>" class="validate[required]" name="fields_req[first_name]" type="text">
                                 </div>
 
                                 <div class="input-block">
                                     <label>Last Name*:</label>
                                     <input tabindex="2" value="<?php if ($fromValue)
-                                                echo $fromValue['last_name']; ?>" class="validate[required]" name="fields_req[last_name]" type="text">
+                                               echo $fromValue['last_name'];
+                    ?>" class="validate[required]" name="fields_req[last_name]" type="text">
                                 </div>
 
                                 <div class="input-block">
                                     <label>User Name*:</label>
                                     <input tabindex="3" value="<?php if ($fromValue)
-                                               echo $fromValue['user_name']; ?>" class="validate[required]" name="fields_req[user_name]" type="text">
+                                               echo $fromValue['user_name'];
+                    ?>" class="validate[required]" name="fields_req[user_name]" type="text">
                                 </div>
 
                                 <div class="input-block">
                                     <label>eMail Address*:</label>
                                     <input tabindex="4" value="<?php if ($fromValue)
-                                               echo $fromValue['email']; ?>" class="validate[required,custom[email]]" name="field_email_req[email]" type="text">
+                                               echo $fromValue['email'];
+                    ?>" class="validate[required,custom[email]]" name="field_email_req[email]" type="text">
                                 </div>
 
 
@@ -113,7 +130,8 @@ if ($read->get("mem_reg_form", "POST")) {
                                 <div class="input-block">
                                     <label>Mobile*:</label>
                                     <input tabindex="7" value="<?php if ($fromValue)
-                                               echo $fromValue['phone']; ?>" class="validate[required]" placeholder="+94112000000" name="fields_req[phone]" type="text">
+                                               echo $fromValue['phone'];
+                    ?>" class="validate[required]" placeholder="+94112000000" name="fields_req[phone]" type="text">
                                 </div>
 
 
@@ -121,10 +139,12 @@ if ($read->get("mem_reg_form", "POST")) {
                                 <div class="input-block">
                                     <label>Address*:</label>
                                     <input tabindex="7" value="<?php if ($fromValue)
-                                               echo $fromValue['address']; ?>" class="validate[required] mid_size left" name="fields_req[address]" type="text">
-											   
-											   <input tabindex="8" value="<?php if ($fromValue)
-                                               echo $fromValue['address2']; ?>" class="validate[required] mid_size Right" name="fields[address2]" type="text">
+                                               echo $fromValue['address'];
+                    ?>" class="validate[required] mid_size left" name="fields_req[address]" type="text">
+
+                                    <input tabindex="8" value="<?php if ($fromValue)
+                                               echo $fromValue['address2'];
+                    ?>" class="validate[required] mid_size Right" name="fields[address2]" type="text">
                                 </div>
 
                                 <div class="input-block">
@@ -138,25 +158,27 @@ if ($read->get("mem_reg_form", "POST")) {
                                             foreach ($jobs as $j) {
                                                 ?>
                                                 <option value="<?php echo $j->id ?>"><?php echo $j->name ?></option>
-                                            <?php }
-                                        } ?>
+    <?php }
+}
+?>
                                     </select>
                                 </div>
-								
-								
+
+
 
                                 <div class="input-block">
                                     <label>Country <span>*</span>:</label>
                                     <select tabindex="10" name="fields_req[country]" id="cuntry">
                                         <option value="">-Select Country-</option>
-                                        <?php
-                                        $country = $con->queryMultipleObjects("SELECT * FROM country");
-                                        if ($country) {
-                                            foreach ($country as $c) {
-                                                ?>
+<?php
+$country = $con->queryMultipleObjects("SELECT * FROM country");
+if ($country) {
+    foreach ($country as $c) {
+        ?>
                                                 <option value="<?php echo $c->code ?>"><?php echo $c->name ?></option>
-                                            <?php }
-                                        } ?>
+    <?php }
+}
+?>
                                     </select>
                                 </div>
 
@@ -166,14 +188,15 @@ if ($read->get("mem_reg_form", "POST")) {
                                     <label>Province / Status:</label>
                                     <select tabindex="11" name="fields_req[state]" id="sta">
                                         <option value="">-Select Province/State-</option>
-                                        <?php
-                                        $state = $con->queryMultipleObjects("SELECT * FROM state");
-                                        if ($state) {
-                                            foreach ($state as $s) {
-                                                ?>
+<?php
+$state = $con->queryMultipleObjects("SELECT * FROM state");
+if ($state) {
+    foreach ($state as $s) {
+        ?>
                                                 <option value="<?php echo $s->stid ?>"><?php echo $s->name ?></option>
                                             <?php }
-                                        } ?>
+                                        }
+                                        ?>
 
                                     </select>
                                 </div>
@@ -182,14 +205,15 @@ if ($read->get("mem_reg_form", "POST")) {
                                     <label>District:</label>
                                     <select tabindex="12" name="fields_req[district]" id="dis">
                                         <option value="">-Select District-</option>
-                                        <?php
-                                        $districts = $con->queryMultipleObjects("SELECT * FROM districts");
-                                        if ($districts) {
-                                            foreach ($districts as $d) {
-                                                ?>
+<?php
+$districts = $con->queryMultipleObjects("SELECT * FROM districts");
+if ($districts) {
+    foreach ($districts as $d) {
+        ?>
                                                 <option value="<?php echo $d->id ?>"><?php echo $d->name ?></option>
-                                            <?php }
-                                        } ?>
+                                               <?php }
+                                           }
+                                           ?>
                                         <option value="0">-Other-</option>
                                     </select>
                                 </div>
@@ -198,7 +222,8 @@ if ($read->get("mem_reg_form", "POST")) {
                                 <div class="input-block">
                                     <label>Birthday:</label>
                                     <input tabindex="13" value="<?php if ($fromValue)
-                                            echo $fromValue['bday']; ?>" class="validate[required]"data-date="01-02-2013" data-date-format="yyy-mm-dd" value="" class="datepicker" name="fields_req[bday]" type="text">
+                                               echo $fromValue['bday'];
+                                           ?>" class="validate[required] datepicker" name="fields_req[bday]" type="text">
                                 </div>
 
                                 <div class="input-block">
@@ -206,29 +231,31 @@ if ($read->get("mem_reg_form", "POST")) {
                                     <select tabindex="14" name="fields_req[gender]" id="gender">
                                         <option value="">-Select Gender-</option>
                                         <option value="M">Male</option>
-                                        <option value="F">Fmale</option>
+                                        <option value="F">Female</option>
                                     </select>
                                 </div>
 
                                 <div class="input-block">
-                                    <label>Select Your Account Type :</label>
+                                    <label>Select User Type :</label>
                                     <select tabindex="15" name="field_int_req[pakage]" id="user-type">
-                                        <option value="">-Selec Account Type-</option>
-                                        <?php
-                                        $pak = $set->getPakageSettings();
-                                        if ($pak) {
+                                        <option value="">-Select User Type-</option>
+<?php
+$pak = $set->getPakageSettings();
+if ($pak) {
 
-                                            foreach ($pak as $p) {
-                                                ?>
+    foreach ($pak as $p) {
+        ?>
 
                                                 <option value="<?php echo $p->id ?>"><?php echo $p->name ?> ($ <?php echo $p->value ?>  Per Year)</option>
 
-                                            <?php }
-                                        } ?>
+    <?php }
+}
+?>
                                     </select>
                                 </div>
                                 <div class="submit-block">
                                     <input tabindex="16" class="green" name="mem_reg_form" type="submit" value="Registor">
+                                    <input type="hidden" tabindex="8" value="1" class="validate[required] mid_size Right" name="isin" type="text"/>
                                 </div>
 
 
@@ -244,10 +271,10 @@ if ($read->get("mem_reg_form", "POST")) {
 
         <div id="main-footer-wrapper">
             <div id="main-footer">
-                <?php include ("../include/main_footer.php"); ?> 
+<?php include ("../include/main_footer.php"); ?> 
             </div>
         </div>
 
-        <?php include ("../include/footer_js.php"); ?>
+<?php include ("../include/footer_js.php"); ?>
     </body>
 </html>

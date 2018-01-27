@@ -78,7 +78,7 @@ if ($read->get("Manual", "POST")) {
                             <div class="info-block">
                                 <h3>Withdraw Your Ads clicks Earn</h3>
 
-
+                                <p>You must earn your credit more than $ <?php echo  $set->getUserWithdrawValue($advsum->getCurruntPakage()); ?>  for withdraw. </p>
                                 <div class="date"><span>Currant Available withdraw Amount: <font class="red">$ <?php echo sprintf("%01.2f", ($advsum->getAvailableWithdraw())); ?></font></span>     <span>Last Withdraw date: <font class=""><?php echo ($advsum->getLastWithDrawDate() ? $advsum->getLastWithDrawDate() : "No Withdraw Date") ?></font></span></div>
                             </div>
 
@@ -86,13 +86,14 @@ if ($read->get("Manual", "POST")) {
                                 <?php if ($advsum->getAvailableWithdraw()) { ?>
                                     <form action="withdraw.php" method="post">
                                         <input class="green" name="Manual" type="submit" value="Manual">
-                                        <input class="green" name="Online" type="submit" value="Online">
+<!--                                        <input class="green" name="Online" type="submit" value="Online">-->
                                     </form>
                                 <?php } ?>
                             </div>
                         <?php } else { ?>
                             <div class="info-block">
                                 <h3>Withdraw Your Ads clicks Earn</h3>
+
                                 <div class="date"><span>Currant Available withdraw Amount: <font class="red">$ <?php echo sprintf("%01.2f", ($advsum->getAvailableWithdraw())); ?></font></span>     <span>Last Withdraw date: <font class=""><?php echo ($advsum->getLastWithDrawDate() ? $advsum->getLastWithDrawDate() : "No Withdraw Date") ?></font></span></div>
 
                                 <div class="date"><span><font class="red">You have allredy requested for withdraw</font></span>    </div>

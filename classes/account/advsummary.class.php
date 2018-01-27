@@ -10,7 +10,7 @@ class advsummary {
     private $userId;
 
     public function __construct($id=false) {
-        date_default_timezone_set('Australia/Melbourne');
+        date_default_timezone_set('Asia/Calcutta');
         $this->date = date('Y-m-d');
         $this->qu = new query();
         $this->con = new DB();
@@ -40,6 +40,37 @@ class advsummary {
         return $pakage->pak;
     }
 
+    public function getCurruntPoints() {
+        $pakage = $this->con->queryUniqueObject("SELECT points AS p FROM  adviewer_account WHERE account_id='" . $this->userId . "'");
+        if (!$pakage) {
+            return false;
+        }
+        return $pakage->p;
+    }
+
+    public function getCurruntReferalamount() {
+        $rpakage = $this->con->queryUniqueObject("SELECT  ref_amount AS ra FROM  adviewer_account WHERE account_id='" . $this->userId . "'");
+        if (!$rpakage) {
+            return false;
+        }
+        return $rpakage->ra;
+    }
+     public function getCurruntReferalClickamount() {
+        $rpakage = $this->con->queryUniqueObject("SELECT ref_click_amount AS ra FROM  adviewer_account WHERE account_id='" . $this->userId . "'");
+        if (!$rpakage) {
+            return false;
+        }
+        return $rpakage->ra;
+    }
+
+    public function getCurruntReferalClick() {
+        $cpakage = $this->con->queryUniqueObject("SELECT ref_click AS rc FROM  adviewer_account WHERE account_id='" . $this->userId . "'");
+        if (!$cpakage) {
+            return false;
+        }
+        return $cpakage->rc;
+    }
+
     public function getRegisterDate() {
         $regDate = $this->con->queryUniqueObject("SELECT register_date AS reg FROM  account  WHERE account_id='" . $this->userId . "'");
         if (!$regDate) {
@@ -59,15 +90,24 @@ class advsummary {
 
     public function getTotalClicksAds() {
 
-        $totClickAds = $this->con->queryUniqueObject("SELECT SUM(view_time) AS tot FROM  adviewer_view_ads WHERE (temp_block=1 OR isblock=1) AND account_id='" . $this->userId . "'");
+        $totClickAds = $this->con->queryUniqueObject("SELECT COUNT(ads_id) AS tot FROM  adviewer_view_ads WHERE (temp_block=1 OR isblock=1) AND account_id='" . $this->userId . "'");
         if (!$totClickAds) {
             return 0;
         }
         return $totClickAds->tot;
     }
+    public function getTotalValidClicksAds() {
+
+        $vtotClickAds = $this->con->queryUniqueObject("SELECT COUNT(cash_book_id) AS tot FROM  pay_ads_cashbook  WHERE account_id='" . $this->userId . "'");
+        if (!$vtotClickAds) {
+            return 0;
+        }
+        return $vtotClickAds->tot;
+    }
+    
 
     public function getCurruntAds() {
-        $cuad = $this->con->queryUniqueObject("SELECT COUNT(ads_id) AS tot FROM  adviewer_view_ads WHERE (temp_block=1 OR isblock=0) AND account_id='" . $this->userId . "'");
+        $cuad = $this->con->queryUniqueObject("SELECT COUNT(adv.ads_id) AS tot FROM  adviewer_view_ads adv,ads_fool af WHERE af.ads_id=adv.ads_id AND af.del_ad=0 AND af.isblock=0 AND (adv.temp_block=0 && adv.isblock=0) AND adv.account_id='" . $this->userId . "'");
         if (!$cuad) {
             return 0;
         }
@@ -83,6 +123,7 @@ class advsummary {
     }
 
     public function getTotEarn() {
+       // var_dump($this->userId);
         $aTot = $this->con->queryUniqueValue("SELECT amount FROM adviewer_account WHERE account_id='" . $this->userId . "'");
         if (!$aTot) {
             return 0;
@@ -104,9 +145,9 @@ class advsummary {
             return 0;
         }
 
-        $limit = $this->set->getWithdrawSettings();
+        $limit = $this->set->getUserWithdrawValue($this->getCurruntPakage());
         if ($aTot > $limit) {
-            return ($aTot - $limit);
+            return ($aTot);
         } else {
             return 0;
         }
@@ -187,6 +228,58 @@ class advsummary {
 
         return false;
     }
+
+    public function getMemberDetail() {
+        $mem = $this->con->queryUniqueObject("SELECT * FROM  account  WHERE account_id='" . $this->userId . "'");
+        if ($mem) {
+            return $mem;
+        }
+
+        return false;
+    }
+
+    public function getRefAccountId() {
+        $refAc_id = $this->con->queryUniqueValue("SELECT refer_account_id FROM  adviewer_register  WHERE account_id='" . $this->userId . "'");
+        if ($refAc_id) {
+            return $refAc_id;
+        }
+
+        return false;
+    }
+
+    public function getRegFee() {
+        $regamount = $this->con->queryUniqueValue("SELECT reg_amount FROM  adviewer_account  WHERE account_id='" . $this->userId . "'");
+        if ($regamount) {
+            return $regamount;
+        }
+
+        return false;
+    }
+
+    public function getCurruntLogSession() {
+        $log = $this->con->queryUniqueValue("SELECT log_session FROM  account  WHERE account_id='" . $this->userId . "'");
+        if ($log) {
+            return $log;
+        }
+
+        return false;
+    }
+
+    public function getReferUser() {
+        $refuser = $this->con->queryUniqueValue("SELECT refer_account_id  FROM  adviewer_register  WHERE account_id='" . $this->userId . "'");
+        if ($refuser) {
+            return $refuser;
+        }
+        return false;
+    }
+    public function getUserDetail() {
+        $detail = $this->con->queryUniqueObject("SELECT *  FROM  account  WHERE account_id='" . $this->userId . "'");
+        if ($detail) {
+            return $detail;
+        }
+        return false;
+    }
+    
 
     //load click ads for each member
 }

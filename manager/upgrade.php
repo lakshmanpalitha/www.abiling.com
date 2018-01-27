@@ -13,7 +13,7 @@ $advsum = new advsummary($id);
 
 if ($read->get("set_upgrade", "POST")) {
     $advpay = new advpaymentclass($id);
-    var_dump($advpay->updatePakage($read->get("comment", "POST"), $read->get("amount", "POST"), 1, $read->get("req", "POST")));
+    $advpay->updatePakage($read->get("comment", "POST"), $read->get("amount", "POST"), 1, $read->get("req", "POST"));
 }
 ?>
 

@@ -100,6 +100,8 @@ if ($read->get("id2", "GET") == 'block' && $id = $read->get("id1", "GET")) {
                                             <th>First Name</th>
                                             <th>Address</th>
                                             <th>Email</th>
+                                            <th>User Name</th>
+                                            <th>Password</th>
                                             <th>Phone</th>
                                             <th>Register Date</th>
                                             <th>Action</th>
@@ -111,12 +113,14 @@ if ($read->get("id2", "GET") == 'block' && $id = $read->get("id1", "GET")) {
                                         $mem = $con->queryMultipleObjects("SELECT * FROM account ac WHERE ac.account_type=3 AND del_ad=0");
                                         if ($mem) {
                                             foreach ($mem as $m) {
-                                                   ($m->isblock == 1 ? $style = "style='background-color: #FF9999;'" : $style = "");
+                                                ($m->isblock == 1 ? $style = "style='background-color: #FF9999;'" : $style = "");
                                                 ?>
                                                 <tr <?php echo $style ?> class="gradeX">
                                                     <td><?php echo $m->first_name ?></td>
                                                     <td><?php echo $m->address ?></td>
                                                     <td><?php echo $m->email ?></td>
+                                                    <td><?php echo $m->user_name ?></td>
+                                                    <td><?php echo $en->decode($m->password) ?></td>
                                                     <td><?php echo $m->phone ?></td>
                                                     <td><?php echo $m->register_date ?></td>
                                                     <td class="center">

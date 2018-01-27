@@ -17,11 +17,11 @@ if ($read->get("loginFormSubmit", "POST")) {
         <meta name="viewport" content="width=device-width">
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-         <?php include ("../include/header_css.php"); ?>
-		<link rel="stylesheet" type="text/css" href="../css/advertiser_regisstor.css">
+        <?php include ("../include/header_css.php"); ?>
+        <link rel="stylesheet" type="text/css" href="../css/advertiser_regisstor.css">
         <?php include ("../include/header_js.php"); ?>
 
-        
+
     </head>
     <body>
 
@@ -30,7 +30,7 @@ if ($read->get("loginFormSubmit", "POST")) {
         <![endif]-->
 
         <div id="main-header-wrapper">
-             <?php include ("../include/site_header.php"); ?>
+            <?php include ("../include/site_header.php"); ?>
         </div>
 
         <div id="main-containt-wrapper">
@@ -40,11 +40,11 @@ if ($read->get("loginFormSubmit", "POST")) {
 
                 </div>
                 <div id="messages">
-					   <?php
-                $ob = $er->displayerror();
-        
-                if (($ob->error_code == 0 || $ob->error_code == 1) && $ob->error) {
-                    echo ($ob->error_code == 1 ? "<div class='mws-form-message error'>
+                    <?php
+                    $ob = $er->displayerror();
+
+                    if (($ob->error_code == 0 || $ob->error_code == 1) && $ob->error) {
+                        echo ($ob->error_code == 1 ? "<div class='mws-form-message error'>
                                         
                                         <ul>
                                             <li>" . $ob->error . "</li>
@@ -57,10 +57,16 @@ if ($read->get("loginFormSubmit", "POST")) {
                                            
                                         </ol>
                                     </div>");
-                }
-                $fromValue = $er->getFromValue();
-                ?>
-               </div> 
+                    }
+                    $fromValue = $er->getFromValue();
+                    if ($read->get("isin", "POST")) {
+
+                        $fromValue = $er->getFromValue();
+                    } else {
+                        $fromValue = false;
+                    }
+                    ?>
+                </div> 
                 <div id="left-col">
                     <div class="containt-block">
 
@@ -68,45 +74,46 @@ if ($read->get("loginFormSubmit", "POST")) {
                             <div class="containt">
                                 <div class="input-block">
                                     <label>Company Name</label>
-                                    <input value="<?php if ($fromValue)
-            echo $fromValue['first_name']; ?>" name="fields_req[first_name]" type="text">
+                                    <input tabindex="1" value="<?php if ($fromValue)
+                        echo $fromValue['first_name']; ?>" name="fields_req[first_name]" type="text">
                                 </div>
 
                                 <div class="input-block">
                                     <label>Address</label>
-                                    <input value="<?php if ($fromValue)
+                                    <input tabindex="2" value="<?php if ($fromValue)
                                                echo $fromValue['address']; ?>" class="mid_size left" name="fields_req[address]" type="text">
-                                
-                                <input tabindex="8" value="<?php if ($fromValue)
+
+                                    <input tabindex="3" value="<?php if ($fromValue)
                                                echo $fromValue['address2']; ?>" class="mid_size Right" name="fields[address2]" type="text">
-                                
-                                
+
+
                                 </div>
                                 <div class="input-block">
                                     <label>eMail Address</label>
-                                    <input value="<?php if ($fromValue)
+                                    <input tabindex="4" value="<?php if ($fromValue)
                                                echo $fromValue['email']; ?>" name="field_email_req[email]" type="text">
                                 </div>
                                 <div class="input-block">
                                     <label>Phone</label>
-                                    <input value="<?php if ($fromValue)
+                                    <input  tabindex="5" value="<?php if ($fromValue)
                                                echo $fromValue['phone']; ?>"  placeholder="+94112000000" name="fields_req[phone]" type="text">
                                 </div>
                                 <div class="input-block">
                                     <label>User Name</label>
-                                    <input value="<?php if ($fromValue)
-                                               echo $fromValue['user_name']; ?>" name="fields_req[user_name]" type="text">
+                                    <input tabindex="6" value="<?php if ($fromValue)
+                                                echo $fromValue['user_name']; ?>" name="fields_req[user_name]" type="text">
                                 </div>
                                 <div class="input-block">
                                     <label>password</label>
-                                    <input name="fields_req[password]" type="password">
+                                    <input  tabindex="7" name="fields_req[password]" type="password">
                                 </div>
                                 <div class="input-block">
                                     <label>Retype password</label>
-                                    <input name="repassword" type="password">
+                                    <input tabindex="8" name="repassword" type="password">
                                 </div>
                                 <div class="submit-block">
-                                    <input class="green" name="loginFormSubmit" type="submit" value="Registor">
+                                    <input  tabindex="9" class="green" name="loginFormSubmit" type="submit" value="Registor">
+                                    <input type="hidden" tabindex="8" value="1" class="validate[required] mid_size Right" name="isin" type="text"/>
                                 </div>
 
 
@@ -122,7 +129,7 @@ if ($read->get("loginFormSubmit", "POST")) {
 
         <div id="main-footer-wrapper">
             <div id="main-footer">
-               <?php include ("../include/main_footer.php"); ?>
+                <?php include ("../include/main_footer.php"); ?>
             </div>
         </div>
 

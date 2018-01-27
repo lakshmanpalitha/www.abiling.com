@@ -1,0 +1,5 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Panora Advertising-The Best Online Advertising Company In Srilanka</title>
+<meta name="keyword" content="Panora,panora advertising ,panora Sri lanka,advertise with panora,LED Boards, Led out screen, Mobile Advertising, advertising vehicle,advertising truck, advertising leader, earn from home, ads click, ad clicks, advertise in sri lanka, leading advertiser, advertising king, innovative advertising, advertising solutions, promational advertising,Earn with panora, hoardings, banners, promotional trucks, mobile advertising tv, mobile tv, panora tv, panora led, cheap advertising, reliable advertising, secured advertising, wining advertising, panora custom base, earn with panora, panora advertiser, ">
+<meta name="viewport" content="width=device-width">

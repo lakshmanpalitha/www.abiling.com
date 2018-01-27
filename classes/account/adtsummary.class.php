@@ -24,7 +24,7 @@ class adtsummary {
     }
 
     public function getAllAds() {
-        $tot = $this->con->queryUniqueValue("SELECT COUNT(af.ads_id) AS tot  FROM submit_ads_info si,ads_fool af WHERE si.ads_id=af.ads_id AND si.account_id='" . $this->userId . "'");
+        $tot = $this->con->queryUniqueValue("SELECT COUNT(si.ads_id) AS tot  FROM submit_ads_info si WHERE si.account_id='" . $this->userId . "'");
         if (!$tot) {
             return 0;
         }
@@ -38,12 +38,22 @@ class adtsummary {
         }
         return $tot;
     }
+
     public function getAllPayments() {
-        $tot = $this->con->queryMultipleObjects("SELECT * FROM advertiser_cashbook ac,submit_ads_info sa WHERE ac.ads_id=sa.ads_id AND sa.account_id='".$this->userId."' ");
+        $tot = $this->con->queryMultipleObjects("SELECT * FROM advertiser_cashbook ac,submit_ads_info sa WHERE ac.ads_id=sa.ads_id AND sa.account_id='" . $this->userId . "' ");
         if (!$tot) {
             return 0;
         }
         return $tot;
+    }
+
+    public function getAdvertiserDetail() {
+        $adt = $this->con->queryUniqueObject("SELECT * FROM  account  WHERE account_id='" . $this->userId . "'");
+        if ($adt) {
+            return $adt;
+        }
+
+        return false;
     }
 
     //load click ads for each member

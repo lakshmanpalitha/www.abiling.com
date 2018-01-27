@@ -11,10 +11,13 @@ if (!$pr->getSession("admin")) {
 $ad = false;
 if ($read->get("adid") || $read->get("id1")) {
     $ad = $con->queryUniqueObject("SELECT * FROM submit_ads_info ads_i,account ac WHERE ac.account_id=ads_i.account_id AND ads_id='" . $read->get("adid") . "'");
+    if($ad){
+    $account_id = $ad->account_id;
+    }
 } else {
     $pr->redirect("index.php");
 }
-$account_id = $ad->account_id;
+
 
 include("spaw/spaw.inc.php");
 $spaw1 = new SpawEditor("spaw1", $template);
@@ -156,18 +159,18 @@ if ($read->get("pub_url", "POST")) {
                                     <div class="control-group">
                                         <label class="control-label">Description :</label>
                                         <div class="controls"><input name="fields_req[description]" type="text" value="<?php if ($ad)
-                                                                     echo $ad->description ?>" class="span20" id="title" placeholder="Title" /></div>
+            echo $ad->description ?>" class="span20" id="title" placeholder="Title" /></div>
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">Company :</label>
                                         <div class="controls">
                                             <select <?php if ($ad)
-                                                                     echo "disabled='disabled'" ?> name="select">
-                                                    <?php
-                                                    $adt = $con->queryMultipleObjects("SELECT * FROM account WHERE account_type=3");
-                                                    if ($adt) {
-                                                        foreach ($adt as $a) {
-                                                            ?>
+            echo "disabled='disabled'" ?> name="select">
+                                                <?php
+                                                $adt = $con->queryMultipleObjects("SELECT * FROM account WHERE account_type=3");
+                                                if ($adt) {
+                                                    foreach ($adt as $a) {
+                                                        ?>
                                                         <option <?php if ($ad && $ad->account_id == $a->account_id)
                                                         echo "selected='selected'" ?> value="<?php echo $a->account_id ?>"><?php echo $a->first_name ?></option>
                                                         <?php }
@@ -175,31 +178,31 @@ if ($read->get("pub_url", "POST")) {
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="control-group">
+<!--                                    <div class="control-group">
                                         <label class="control-label">No of view time :</label>
                                         <div class="controls"><input name="field_int[view_time]" type="text" value="<?php if ($ad)
                                                         echo $ad->dis_time ?>" class="span20" id="title" />
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <div class="control-group">
                                         <label class="control-label">Ad running period(seconds) :</label>
                                         <div class="controls"><input name="field_int[ad_run_time]" type="text" value="" class="span20" id="title" />
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label">Ad value per gold($) :</label>
+                                        <label class="control-label">Ad Value for <?php echo $con->queryUniqueValue("SELECT name FROM settings_pakage WHERE id=1") ?> ($) :</label>
                                         <div class="controls"><input name="field_int[rate1]" type="text" value="" class="span20" id="title" />
                                         </div>
 
-                                        <label class="control-label">Ads value per silver($) :</label>
+                                        <label class="control-label">Ad Value for <?php echo $con->queryUniqueValue("SELECT name FROM settings_pakage WHERE id=2") ?>($) :</label>
                                         <div class="controls"><input name="field_int[rate2]" type="text"value="" class="span20" id="title" />
                                         </div>
 
-                                        <label class="control-label">Ads value per platinum($) :</label>
+                                        <label class="control-label">Ad Value for <?php echo $con->queryUniqueValue("SELECT name FROM settings_pakage WHERE id=3") ?>($) :</label>
                                         <div class="controls"><input name="field_int[rate3]" type="text"  value="" class="span20" id="title"/>
                                         </div>
                                     </div>
-                                    <div class="control-group">
+<!--                                    <div class="control-group">
                                         <label class="control-label">If special Display Time Shedule</label>
                                         <div id="spnp" class="controls">
 
@@ -208,11 +211,11 @@ if ($read->get("pub_url", "POST")) {
                                         </div>
                                         <div class="controls">
                                             From : <input type="text" data-date="2013-01-01" data-date-format="yyyy-mm-dd" name="fields_req[from]" value="<?php if ($ad)
-                                                                     echo $ad->from ?>" class="datepicker" />
+                                                        echo $ad->from ?>" class="datepicker" />
                                             &nbsp;&nbsp;To : <input type="text" data-date="2013-01-01" data-date-format="yyyy-mm-dd" name="fields_req[to]" value="<?php if ($ad)
-                                                          echo $ad->to ?>" class="datepicker" />
+                                                        echo $ad->to ?>" class="datepicker" />
                                         </div>
-                                    </div>
+                                    </div>-->
                                     <?php if ($ad->ads_type) { ?>
                                         <div class="control-group">
                                             <label class="control-label">Ad <?php echo ($ad->ads_type == 1 ? "Url" : "Designing") ?></label>
@@ -226,7 +229,7 @@ if ($read->get("pub_url", "POST")) {
 
                                                 <?php } else { ?>
                                                     <input name="fields_req[url]" type="text" value="<?php if ($ad->url)
-                                                echo $ad->url ?>" class="span20" id="title" />
+                                                        echo $ad->url ?>" class="span20" id="title" />
                                                        <?php } ?>
 
                                             </div>

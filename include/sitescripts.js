@@ -1,4 +1,4 @@
-var path="http://192.168.137.3/MICROSOLA/www.panora.com/include";
+var path="http://localhost/www.panoraadvartising.com/include";
 $(document).ready(function(){
     
     

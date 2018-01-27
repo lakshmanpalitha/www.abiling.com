@@ -28,7 +28,7 @@ if ($read->get("del", "GET") == 'y' && $id = $read->get("adid", "GET")) {
         <!--top-Header-menu-->
         <div id="user-nav" class="navbar navbar-inverse">
             <ul class="nav">
-                <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>
+<!--                <li class="" ><a title="" href="#"><i class="icon icon-user"></i> <span class="text">Profile</span></a></li>-->
 <!--                <li class=" dropdown" id="menu-messages"><a href="#" data-toggle="dropdown" data-target="#menu-messages" class="dropdown-toggle"><i class="icon icon-envelope"></i> <span class="text">Messages</span> <span class="label label-important">5</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a class="sAdd" title="" href="#">new message</a></li>

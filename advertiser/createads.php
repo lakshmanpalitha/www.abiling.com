@@ -105,7 +105,7 @@ if ($read->get("next_stp2", "POST")) {
                                         </div>
                                     </div>
                                 </div>
-                                <h3>Select  Your Ads Display Durations</h3>
+<!--                                <h3>Select  Your Ads Display Durations</h3>
                                 <div id="spf_t" class="input-block">
 
                                     <label>Not Specify</label><input type="checkbox" id="np" name="np" value="1" />
@@ -126,7 +126,7 @@ if ($read->get("next_stp2", "POST")) {
                                         </select>
 
                                     </div>
-                                </div>
+                                </div>-->
 
 
 

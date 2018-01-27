@@ -1,0 +1,40 @@
+.pagination {
+	padding: 3px;
+	margin: 3px;	
+	font:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+.pagination a {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #EEE;
+	text-decoration: none; /* no underline */
+	color: #60993b;
+	font:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+
+.pagination a:hover,
+.pagination a:active {
+	border: 1px solid #999;
+	color: #666;
+}
+.pagination .current {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #60993b;
+	font-weight: bold;
+	background-color: #60993b;
+	color: #FFF;
+	font:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}
+.pagination .disabled {
+	padding: 2px 5px 2px 5px;
+	margin: 2px;
+	border: 1px solid #EEE;
+	color: #DDD;
+	font:Verdana, Arial, Helvetica, sans-serif;
+	font-size:12px;
+}

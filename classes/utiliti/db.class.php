@@ -18,7 +18,7 @@ class DB {
 
     /** Connect to a MySQL database to be able to use the methods below. */
     //function DB($base = 'microsq0_panora', $server = 'localhost', $user = 'microsq0_panora', $pass = 'LRvPSLd([Uzk') {
-    function DB($base = 'microsq0_abiling', $server = 'localhost', $user = 'microsq0_pvtltd', $pass = 'fCo-MJpOuTOH') {
+    function DB($base = 'panora', $server = 'localhost', $user = 'root', $pass = '') {
         $this->mtStart = $this->getMicroTime();
         $this->nbQueries = 0;
         $this->lastResult = NULL;
@@ -97,6 +97,7 @@ class DB {
 
         $this->nbQueries++;
         $result = mysql_query($query) or ($res = $this->debugAndDie($query));
+        var_dump(mysql_fetch_object($result));
         if ($res) {
             $this->debug($debug, $query, $result);
 

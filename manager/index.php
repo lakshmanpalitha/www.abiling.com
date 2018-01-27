@@ -96,6 +96,7 @@ if ($read->get("id1", "GET") == 'logout') {
 <!--                    <li> <a href="#"> <i class="icon-graph"></i>Report</a> </li>-->
                     <li> <a href="#"> <i class="icon-wallet"></i>Payment</a> </li>
                     <li> <a href="settings.php"> <i class="icon-lock"></i>Settings</a> </li>
+                    <li> <a href="reports.php"> <i class="icon-shopping-bag"></i>Report</a> </li>
                 </ul>
             </div>
             <div class="container-fluid">

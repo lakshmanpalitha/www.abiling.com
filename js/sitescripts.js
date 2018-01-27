@@ -1,5 +1,6 @@
-//var path="http://192.168.137.3/MICROSOLA/www.panora.com/include";
-var path="http://localhost/www.abiling.com/web/include";
+var path="http://localhost/www.panoraadvartising.com/";
+//var path="http://www.panoraadvertising.com/include";
+//var path="http://microsola.com/preview/panoraadvertising/web/include";
 $(document).ready(function(){
     $("#cuntry").change(function(){
         var coun = $(this).val(); 
@@ -33,7 +34,11 @@ $(document).ready(function(){
                 var nhtml="<option value='-'>-Other-</option>";
                 $('#dis').html(nhtml);
             }
+         
+
         });
+        
+    
     });
     
     
@@ -174,6 +179,7 @@ $(document).ready(function(){
             });
         
             var myURL=path+"/load.php?key=agMulStats";
+            $('#p2').html("");
             $.ajax({    
                 type: "post",
                 url: myURL,

@@ -39,14 +39,14 @@ $acid = $read->get('acid');
                     </ul>
                 </li>-->
 <!--                <li class=""><a title="" href="#"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>-->
-               <li class=""><a title="" href="index.php?id1=logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+                <li class=""><a title="" href="index.php?id1=logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
             </ul>
         </div>
         <div id="search">
             <input type="text" placeholder="Search here..."/>
             <button type="submit" class="tip-left" title="Search"><i class="icon-search icon-white"></i></button>
         </div>
-         <?php include("includes/sidebar.php");?>
+        <?php include("includes/sidebar.php"); ?>
         <!--close-top-Header-menu-->
 
 <!--        <div id="sidebar"> <a href="#" class="visible-phone"><i class="icon icon-th-list"></i> Tables</a>
@@ -147,21 +147,12 @@ $acid = $read->get('acid');
                                                 <td><?php echo $member->register_date ?></td>
                                             </tr>
                                             <tr class="gradeX"> 
-                                                <td>Account Type</td>
+                                                <td>User Type</td>
                                                 <td><?php echo ($member->account_type == 1 ? "Main" : "Sub") ?></td>
                                             </tr>
                                             <tr class="gradeX"> 
-                                                <td>Pakage</td>
-                                                <td><?php
-                                        if ($member->pakage == 1) {
-                                            echo "Sliver";
-                                        } else
-                                        if ($member->pakage == 2) {
-                                            echo "Gold";
-                                        } else {
-                                            echo "Platinum";
-                                        }
-                                            ?></td>
+                                                <td>Select User type</td>
+                                                <td><?php echo $set->getPakageName($member->pakage); ?></td>
                                             </tr>
 
 

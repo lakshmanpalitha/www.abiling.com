@@ -13,7 +13,7 @@ $advpay = new advpaymentclass($id);
 if ($read->get("pa_ad", "POST")) {
     if ($advpay->insertAdviewerCashbook($read->get("comment", "POST"), $read->get("amount", "POST"), 1)) {
         if ($advpay->updateReg()) {
-            
+            $advpay->addRegistrationFee($read->get("amount", "POST"));
         }
     }
 }
@@ -133,7 +133,7 @@ if ($read->get("pa_withdraw", "POST")) {
                                         <div class="control-group">
                                             <label class="control-label">Amount</label>
                                             <div class="controls">
-                                                <input type="text" name="amount" value="<?php echo $con->queryUniqueValue("SELECT amount FROM settings_ads"); ?>" class="span6" /> 
+                                                <input type="text" name="amount" value="<?php echo $con->queryUniqueValue("SELECT reg_amount FROM adviewer_register WHERE account_id='".$id."'"); ?>" class="span6" /> 
                                             </div>
                                         </div>
                                         <div class="control-group">
@@ -219,7 +219,7 @@ if ($read->get("pa_withdraw", "POST")) {
                                     <span class="icon">
                                         <i class="icon-align-justify"></i>									
                                     </span>
-                                    <h5>Panora Account</h5>
+                                    <h5>Member Register Account</h5>
                                 </div>
                                 <?php $advsum = new advsummary($id);
                                 $credit = $advsum->getCredit() ?>
@@ -267,7 +267,7 @@ if ($read->get("pa_withdraw", "POST")) {
                                     <span class="icon">
                                         <i class="icon-align-justify"></i>									
                                     </span>
-                                    <h5>Ads Account</h5>
+                                    <h5>Member Ads Account</h5>
                                 </div>
                                 <?php $ad_credit = $advsum->getAdsCredit(); ?>
                                 <div class="widget-content nopadding">
@@ -313,7 +313,7 @@ if ($read->get("pa_withdraw", "POST")) {
                                     <span class="icon">
                                         <i class="icon-align-justify"></i>									
                                     </span>
-                                    <h5>Withdraw Account</h5>
+                                    <h5>Member Withdraw Account</h5>
                                 </div>
                                 <?php $debit = $advsum->getDebit() ?>
                                 <div class="widget-content nopadding">

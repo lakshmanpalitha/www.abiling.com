@@ -73,9 +73,10 @@ $id = $pr->getSession("advac");
                         $date = new DateTime($newDate);
 
                         $date->modify('+365 day');
+                        $user=$advsum->getMemberDetail();
                         ?>
 
-                        <div class="date"><span>Account Expoir Date: <font class="red"><?php echo $date->format('Y-m-d'); ?></font></span>     <span>Last Modified date: <font class="">You not modified account</font></span></div>
+                        <div class="date"><span>Account Expoir Date: <font class="red"><?php echo $date->format('Y-m-d'); ?></font></span>     <span>Last Log date: <font class=""><?php echo $user->l_log_date  ?></font></span></div>
                     </div>
 
                     <div class="submit-block">

@@ -18,11 +18,7 @@ if (!$user = $adv->getUser()) {
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<title></title>
-<meta name="description" content="">
-<meta name="viewport" content="width=device-width">
+ <?php include ("meta.php"); ?>
 <?php include ("../include/header_css.php"); ?>
 <link rel="stylesheet" type="text/css" href="../css/terms.css">
 <?php include ("../include/header_js.php"); ?>

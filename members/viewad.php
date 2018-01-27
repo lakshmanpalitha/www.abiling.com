@@ -11,11 +11,12 @@ if (!$pr->getSession("adv")) {
 if ($read->get("action", "GET") == 'logout') {
     $adv->logout();
 }
-if (!$read->get("id1", "GET")) {
+if (!$read->get("id1", "GET") || !$read->get("id2", "GET")) {
     $pr->redirect("my_ads.php");
     exit();
 }
 $de_id = $en->decode($read->get("id1", "GET"));
+$ad_id = $en->decode($read->get("id2", "GET"));
 if (!$de_id) {
     $pr->redirect("my_ads.php");
 }
@@ -23,6 +24,13 @@ $isAdBlock = $advcad->checkAdBlock($read->get("id1", "GET"));
 $icon = $pr->createVerifyIcons();
 //$setAdRun = $advcad->setAdIsRunning($read->get("id1", "GET"));
 //$setAdRun = $advcad->tempblockAd($read->get("id1", "GET"));
+$adv->setLastLoginDate();
+$dblog=$advsum->getCurruntLogSession();
+$clog=  session_id();
+if($dblog!=$clog){
+    $er->createerror("Unauthorized login!, you loged in more than one browser.So your ads click is not valid.", 1); 
+}
+$verifyKey=$en->encode(rand(100000,100000000));
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -38,25 +46,7 @@ $icon = $pr->createVerifyIcons();
         <?php include ("../include/header_css.php"); ?>
         <link rel="stylesheet" type="text/css" href="../css/viewads.css">
         <?php include ("../include/header_js.php"); ?>
-        <style>
-            body,
-            html{
-                padding:0;
-                margin:0;
-                overflow:hidden;
-                background:#000;
-            }
-            #ytplayer{
-                position:absolute;
-                top:0;
-                left:0;
-                width:100%;
-                height:800px;
-                z-index:1000;
-                zoom:1;
-                background:url(../images/dot.png) repeat;
-            }
-        </style>
+
 
     </head>
     <body>
@@ -74,12 +64,12 @@ $icon = $pr->createVerifyIcons();
                             <li id="neg_li"></li>
                         </ul>
                         <ul id="neg2" style="display: none;">
-                            <li>another ad running</li>
-                            <li>ad have viewed in ealy</li>
-                            <li>ad expired</li>
+                            <li>Another ad is running</li>
+                            <li>Or ad all ready viewed </li>
+                            <li>Or you have loged by another browser </li>
                         </ul>
                         <ul id='pos' style="display: none;">
-                            <li>success process</li>
+                            <li>Success process</li>
                             <li id="pos_li"></li>
                         </ul>
                         <?php
@@ -116,7 +106,7 @@ $icon = $pr->createVerifyIcons();
             <div id="main-containt">
                 <div id="ytplayer"></div>
                 <?php
-                $type = $con->queryUniqueObject("SELECT * FROM ads_fool WHERE ads_id='" . $de_id . "'");
+                $type = $con->queryUniqueObject("SELECT * FROM ads_fool WHERE ads_id='" . $ad_id . "'");
                 if (!$type) {
                     $pr->redirect("my_ads.php");
                 }
@@ -125,26 +115,70 @@ $icon = $pr->createVerifyIcons();
                     $check1 = explode(".", $type->url);
                     if ($check1) {
                         if ($check1[1] == "youtube") {
-                            $check2 = explode("?", $type->url);
-                            if ($check2) {
-                                $check3 = explode("=", $check2[1]);
-                                if ($check3[0] == 'v') {
-                                    $id = $check3[1];
-                                    if ($id) {
-                                        $new_url = "http://www.youtube.com/embed/" . $id . "?modestbranding=1&controls=0&loop=1&autoplay=1&rel=0&showinfo=0";
-                                    }
-                                }
-                            }
                             ?>
-                            <iframe width="100%" height="1000" src="<?php echo $new_url ?>" frameborder="0" allowfullscreen></iframe>
+                            <style>
+                                body,
+                                html{
+                                    padding:0;
+                                    margin:0;
+                                    overflow:hidden;
+                                    background:#000;
+                                }
+                                #ytplayer{
+                                    position:absolute;
+                                    top:0;
+                                    left:0;
+                                    width:100%;
+                                    height:1000px;
+                                    z-index:1000;
+                                    zoom:1;
+                                    background:url(../images/dot.png) repeat;
+                                }
+                                #youtube-wrapper{
+                                    background-color: #000000;
+                                    width: 853px;
+                                    margin: 80px auto 0 auto;
+                                }
+                                iframe body {background-color:#000;}
+                            </style>
+                            <?php
+//                            $check2 = explode("?", $type->url);
+//                            if ($check2) {
+//                                $check3 = explode("=", $check2[1]);
+//                                if ($check3[0] == 'v') {
+//                                    $id = $check3[1];
+//                                    if ($id) {
+//                                        $new_url = "http://www.youtube.com/embed/" . $id . "?modestbranding=1&controls=0&loop=1&autoplay=1&rel=0&showinfo=0";
+//                                    }
+//                                }
+//                            }
+                            $ytid = explode("?v=", $type->url);
+            if (count($ytid) > 1) {
+                $check2 = $ytid[1];
+            } else {
+
+                $ytid2 = explode("&v=", $type->url);
+                $check2 = $ytid2[1];
+            }
+
+            if ($check2) {
+                //$check3 = explode("=", $check2[1]);
+
+                $id = substr($check2, 0, 11);
+                if ($id) {
+                    $new_url = "http://www.youtube.com/embed/" . $id . "?modestbranding=1&controls=0&loop=1&autoplay=1&rel=0&showinfo=0";
+                }
+            }
+                            ?>
+                            <div id="youtube-wrapper"><iframe width="853px" height="480px"  src="<?php echo $new_url ?>" frameborder="0"></iframe></div>
                             <?php
                         } else {
                             ?>
-                            <iframe src="<?php echo $type->url ?>" width="100%" height="1000px" scrolling="no" frameborder="0"></iframe> 
+                            <iframe src="<?php echo $type->url ?>" width="100%" height="1000px" scrolling="yes" frameborder="0"></iframe> 
                         <?php }
                     } ?>
                 <?php } else { ?>
-                    <iframe src="ad.php?id1=<?php echo $read->get("id1", "GET"); ?>" width="100%" height="1000px" scrolling="no" frameborder="0"></iframe> 
+                    <iframe src="ad.php?id1=<?php echo $read->get("id1", "GET"); ?>" width="100%" height="1000px" scrolling="yes" frameborder="0"></iframe> 
                     <?php
                 }
                 ?>
@@ -153,15 +187,15 @@ $icon = $pr->createVerifyIcons();
 
             <div id="main-footer-wrapper">
                 <div id="main-footer">
-<?php include ("../include/main_footer.php"); ?> 
+                    <?php //include ("../include/main_footer.php"); ?> 
                 </div>
             </div>
 
-                    <?php include ("../include/footer_js.php"); ?>
-                    <?php
-                    if ($isAdBlock) {
-                        $cookieTime = ($type->ad_run_time + 10);
-                        ?>
+            <?php include ("../include/footer_js.php"); ?>
+            <?php
+            if ($isAdBlock) {
+                $cookieTime = ($type->ad_run_time + 10);
+                ?>
                 <script>
                     jQuery(document).ready(function($) {
                         $("#showselect").css("display","none");
@@ -170,7 +204,7 @@ $icon = $pr->createVerifyIcons();
                         var timerID = setInterval(function() {
                             if(count > 1){
                                 $('#showcount').html(Math.floor(count-=1));
-                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                            
                             }
                             else{
                                 clearInterval(timerID); 
@@ -182,39 +216,39 @@ $icon = $pr->createVerifyIcons();
                                 $("#icon").css("display","none");
                                 $("#sel_icon").css("display","none");
                                 $('#showcount').html("");
-                                del_cookie('ad');
+                                setCookie('ad','bl',<?php echo $cookieTime ?>); 
                             } 
-                        }, 2300 );
-                                                                                                                                                                                                                                                                            
+                        }, 1150 );
+                                                                                                                                                                                                                                                                                            
                     });
                 </script>
-    <?php
-} else {
-    $cookieTime = ($type->ad_run_time + 10);
-    ?>
+                <?php
+            } else {
+                $cookieTime = ($type->ad_run_time + 15);
+                ?>
                 <script>
                     jQuery(document).ready(function($) {
                         var isCookie=false;
                         $("#showselect").css("display","none");
                         var count = <?php echo $type->ad_run_time; ?>;
                         var getcookie=getCookie("ad")
-                        if(!getcookie){
+                        if(getcookie== 'bl' || !getcookie){
                             setCookie('ad','<?php echo $read->get("id1", "GET") ?>',<?php echo $cookieTime ?>);  
                         }else{
                             isCookie=true;
                         }
-                                                                                                                                                       
+                                                                                                                                                                       
                         var timerID = setInterval(function() {
                             if(count > 1){
                                 $('#count').html(Math.floor(count-=1));
-                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                            
                             }
                             else{
                                 clearInterval(timerID);
-                                var getcookie=getCookie("ad");
-                                                                                                                                                
+                                var ngetcookie=getCookie("ad");
+                                                                                                                                                                
                                 if(!isCookie){
-                                    if(!getcookie && getcookie!=<?php echo $de_id ?> ){
+                                    if(!ngetcookie && ngetcookie!=<?php echo $de_id ?> ){
                                         tmp('<?php echo $read->get("id1", "GET") ?>');  
                                         //var html="<ul id='neg'><li>Session error</li>";
                                         $('#showselect').css("display","block");
@@ -224,7 +258,7 @@ $icon = $pr->createVerifyIcons();
                                         $("#icon").css("display","none");
                                         $("#sel_icon").css("display","none");
                                         $('#showcount').html("");
-                                        $('#neg_li').html("Session error");
+                                        $('#neg_li').html("Sorry!, you have clicked more than one ad in same session");
                                     }else{
                                         $('#showselect').css("display","block");
                                         $("#neg1").css("display","none");
@@ -233,7 +267,7 @@ $icon = $pr->createVerifyIcons();
                                         $("#count").css("display","none");
                                         $("#icon").css("display","block");
                                         $("#sel_icon").css("display","block");
-                                        del_cookie('ad');
+                                        setCookie('ad','bl',<?php echo $cookieTime ?>); 
                                     }
                                 }else{
                                     tmp('<?php echo $read->get("id1", "GET") ?>');  
@@ -245,15 +279,15 @@ $icon = $pr->createVerifyIcons();
                                     $("#icon").css("display","none");
                                     $("#sel_icon").css("display","none");
                                     $('#showcount').html("");
-                                    $('#neg_li').html("Session error");
+                                    $('#neg_li').html("Sorry!, you have clicked more than one ad in same session");
                                 }
-                                                                                                                                                                            
+                                                                                                                                                                                            
                             } 
-                        }, 2300 );
-                                                                                                                                                                                                                                                                            
+                        }, 1150 );
+                                                                                                                                                                                                                                                                                            
                     });
                 </script>
-<?php } ?>
+            <?php } ?>
             <script>
                 function verifyimg(id){
                    
@@ -272,67 +306,10 @@ $icon = $pr->createVerifyIcons();
                         $("#sel_icon").css("display","none");
                         $('#showcount').html("");
                         $('#neg_li').html("invalid selection");
-                        del_cookie('ad');
+                        setCookie('ad','bl',<?php echo $cookieTime ?>); 
                     }
                 }
                     
-                //                function anyrun(adsid){
-                //    
-                //                    var myURL=path+"/load.php?key=anyrun&id="+adsid;
-                //                    $.ajax({    
-                //                        type: "post",
-                //                        url: myURL,
-                //                        dataType: "json",
-                //                        success: function(request) {
-                //                            if(request){
-                //                  
-                //                                var val=request.result.response;
-                //                                if(val=='true'){
-                //                                    $('#showcount').html("Enother ad running");  
-                //                                    unset('<?php echo $read->get("id1", "GET") ?>');
-                //                                }else{
-                //                                    $('#showselect').html(<?php echo $icon[2] ?>);
-                //                                    $("#showselect").css("display","block");
-                //                                    $('#showcount').html(<?php echo $icon[1] ?>); 
-                //                                }
-                //                            }
-                //                        },// End success
-                //                        error: function(){
-                //                            unset('<?php echo $read->get("id1", "GET") ?>');
-                //                            $('#showselect').html("Error");
-                //                            $("#showselect").css("display","block");
-                //                            $('#showcount').html("");
-                //                        }
-                //                    }); // End ajax method 
-                //    
-                //                }
-
-                //                function unset(adsid){
-                //    
-                //                    var myURL=path+"/load.php?key=unset&id="+adsid;
-                //                    $.ajax({    
-                //                        type: "post",
-                //                        url: myURL,
-                //                        dataType: "json",
-                //                        success: function(request) {
-                //                            var val=request.result.response;
-                //                            if(val=='true'){
-                //                               
-                //                            }else{
-                //                                $('#showselect').html("Error");
-                //                                $("#showselect").css("display","block");
-                //                                $('#showcount').html("");
-                //                            }
-                //                        }, // End success
-                //                        error: function(){
-                //                            $('#showselect').html("Error");
-                //                            $("#showselect").css("display","block");
-                //                            $('#showcount').html("");
-                //                        }
-                //                    }); // End ajax method 
-                //    
-                //                }
-
                 function tmp(adsid){
     
                     var myURL=path+"/load.php?key=tmp&id="+adsid;
@@ -357,8 +334,8 @@ $icon = $pr->createVerifyIcons();
     
                 }
                 function verifyAd(adsid){
-    
-                    var myURL=path+"/load.php?key=verifyAd&id="+adsid;
+                    var vkey='<?php echo $verifyKey ?>';
+                    var myURL=path+"/load.php?key=verifyAd&id="+adsid+"&vkey="+vkey;
                     $.ajax({    
                         type: "post",
                         url: myURL,
@@ -366,6 +343,10 @@ $icon = $pr->createVerifyIcons();
                         success: function(request) {
                             var val=request.result.response;
                             if(val > 0){
+                                if(val==99999999){
+                                    alert("Your are clicks in ad more than one time");
+                                }else{
+                                    setCookie('ad','bl',<?php echo $cookieTime ?>); 
                                 $('#showselect').css("display","block");
                                 $("#neg1").css("display","none");
                                 $("#neg2").css("display","none");
@@ -374,7 +355,9 @@ $icon = $pr->createVerifyIcons();
                                 $("#sel_icon").css("display","none");
                                 $('#showcount').html("");
                                 $('#pos_li').html("you earn $"+val);
-                                del_cookie('ad');
+                                }
+                                
+                                
                             }else{
                                 $('#showselect').css("display","block");
                                 $("#neg1").css("display","none");
@@ -383,7 +366,7 @@ $icon = $pr->createVerifyIcons();
                                 $("#icon").css("display","none");
                                 $("#sel_icon").css("display","none");
                                 $('#showcount').html("");
-                                del_cookie('ad');
+                                setCookie('ad','bl',<?php echo $cookieTime ?>); 
                             }
                 
                         },
@@ -397,7 +380,7 @@ $icon = $pr->createVerifyIcons();
                             $("#sel_icon").css("display","none");
                             $('#showcount').html("");
                             $('#neg_li').html("unexpected error try again");
-                            del_cookie('ad');
+                            setCookie('ad','bl',<?php echo $cookieTime ?>); 
                         }// End success
                     }); // End ajax method 
     
@@ -446,8 +429,7 @@ $icon = $pr->createVerifyIcons();
                 }
                 
                 function del_cookie(name) {
-                    document.cookie = name +
-                        '=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
+                    document.cookie = name +'=; expires=Thu, 01-Jan-70 00:00:01 GMT;';
                 } 
                 
    
